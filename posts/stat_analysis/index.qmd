@@ -1,0 +1,372 @@
+---
+title: "#3 Statistical analysis in ecology with `broom`"
+author: Diego P.F. Trindade
+date: '2020-07-15'
+slug: statistical-analysis-in-ecology
+html:
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: true
+  warning: false
+  message: false
+categories: []
+tags:
+  - biotime
+  - ecology
+  - tidymodels
+  - bootstrap
+image: "featured.png"
+---
+![Image credit: Alisson Horst](featured.png)
+
+```{r eval = F}
+#install.packages(c("here", "dplyr", "vroom", "tidyr", "purrr")) #1st post
+#install.packages(c("ggplot2", "cowplot", "glue", "ggtext", "ggrepel")) #2nd post
+#install.packages(c("broom", "modelr", "mgcv", "pander")) #3rd post
+
+
+library(broom)
+library(modelr)
+library(mgcv)
+library(pander)
+library(ggplot2)
+library(cowplot)
+library(glue)
+library(here)
+
+
+```
+
+```{r, include=FALSE}
+library(tidymodels)
+library(tidyverse)
+library(emo)
+library(ggplot2)
+library(cowplot)
+library(here)
+library(tidyverse)
+library(broom)
+library(glue)
+library(mgcv)
+
+
+```
+
+```{r include=FALSE}
+
+#devtools::install_dev("vroom")
+library(vroom)
+
+biotime_df <- vroom(here("posts", 
+                         "biotime.zip"), delim = ",")
+
+biotime_metadata <- vroom(here("posts", 
+                               "biotime_meta.csv"), delim = ",")
+
+
+```
+
+```{r include=FALSE}
+
+biotime <- biotime_df %>% 
+  select(id = STUDY_ID, year = YEAR, plot = PLOT, 
+         abundance = sum.allrawdata.ABUNDANCE, 
+         biomass = sum.allrawdata.BIOMASS, sp = GENUS_SPECIES, LONGITUDE, LATITUDE)
+
+
+metadata <- biotime_metadata %>% 
+  select(STUDY_ID:ORGANISMS) %>% 
+  rename(id = STUDY_ID)
+
+
+
+```
+
+```{r include=FALSE}
+
+merge_df <- left_join(biotime, metadata, by = "id")
+
+```
+
+```{r include=FALSE}
+rich_plot <- merge_df %>% 
+  filter(TAXA %in% c("Birds",
+                     "Fish",
+                     "Terrestrial plants",
+                     "Marine invertebrates")) %>% 
+  group_by(id,year) %>% 
+  mutate(richness = n_distinct(sp),.after="abundance") %>% 
+  ungroup %>% 
+  group_by(id) %>% 
+  distinct(richness, CLIMATE,year,id,TAXA,PROTECTED_AREA) %>% 
+  mutate(n_year = n_distinct(year)) %>%
+         filter(n_year > 10)
+```
+
+# `broom` package
+
+`broom` organizes the messy output we get from `summary(model)`, giving us a `tibble` with different parameters present in our models. `broom` also supports working within lists, as we have seen in our previous posts. In short, when we need to perform several statistical analysis, with `broom`, we can nest the variables and run them all at once. To start, this package has three main functions `tidy()`, `glance()` and `augment()`. Each one gives us different parameters.
+
+As the package's page says:
+
+`tidy()` summarizes information about model components `glance()` reports information about the entire model `augment()` adds informations about observations to a dataset
+
+Let's check them out. I will keep using the data frame `rich_plot`, we were evaluating last time. I will build a non-sense linear model here, using species richness and year.
+
+```{r}
+
+model <- rich_plot %>%
+  lm(richness ~ year, .)
+
+```
+
+Using the traditional way, we can check the output of our model with `summary()`:
+
+```{r}
+summary(model)
+```
+
+## `tidy()`
+
+With `broom` we get the same but more organized. Using `tidy()`, we get the same as in `Coefficients` in the `summary(...)` output: estimates of our model, error, t value and p value
+
+```{r}
+tidy(model)
+```
+
+## `glance()`
+
+`glance()` gives us the final part of the `summary(..)` output: r squared, Residual standard error, F-statistic, degrees of freedom etc, but also AIC values.
+
+```{r}
+glance(model)
+```
+
+## `augment()`
+
+Whereas `augment` gives us fitted values, residuals etc.
+
+```{r}
+augment(model)
+```
+
+# Nested models
+
+Now that we are kinda introduced to the main functions present in `broom`, let's build the same model but based on each taxa we have. For that, we have to nest our data by `TAXA` and then use `mutate()` to create a new column (`'model'`).
+
+```{r}
+
+broom_mod<-rich_plot %>% 
+  filter(n_year>30) %>%
+group_by(TAXA) %>% 
+nest()
+
+
+```
+
+All information we have is nested within the column `data`. Now we can use `map()` to go into this column. We can use the same approach we did for the nested plots, using `mutate()` to create a new column ("model") and `map()` to perform the model.
+
+```{r}
+
+nested_models<-broom_mod %>% 
+  mutate(model = map(data, ~lm(richness ~ year, data=.x)))
+nested_models
+```
+
+Now we have both data and model's column nested. We need to use one of the `broom`'s functions here to get the information. Let's use `tidy`, for example. For that, we simply create a new column, using the same approach `mutate()` and `map()`, saying that we want to access the column `model` and get the `tidy` output. Finally we unnest the column we just created with `unnest()`
+
+```{r}
+
+nested_models %>% mutate(coefs = map(model, tidy, conf.int = TRUE)) %>% 
+  unnest(coefs)
+
+```
+
+We could also use `glance` instead of `tidy` if we want the .fitted values, for example
+
+```{r}
+nested_models %>% mutate(gl = map(model, glance, conf.int = TRUE)) %>% 
+  unnest(gl)
+
+```
+
+We use the same approach for different models. Let's perform, for example, a gam model, getting the coefs and r squared of each model, now using only one nested function.
+
+```{r}
+rich_plot %>% 
+  filter(n_year>30) %>%
+group_by(TAXA) %>% 
+nest() %>% 
+  mutate(model = map(data, ~gam(richness ~ s(year, bs = "cs",k=-1), data=.x)),
+         coefs = map(model, tidy, conf.int = TRUE),
+         Rsq = map_dbl(model, ~summary(.)$r.sq)) %>% 
+  unnest(coefs)
+
+```
+
+We can also perform ANOVA
+
+```{r}
+
+
+rich_plot %>% 
+ filter(n_year>30) %>%
+group_by(TAXA) %>% 
+nest() %>% 
+  mutate(model = purrr::map(data, ~aov(richness ~ CLIMATE, data=.x)),
+         coefs = purrr::map(model, tidy, conf.int = F)) %>% 
+  unnest(coefs)
+
+
+
+
+```
+
+Tukey test and so on
+
+```{r}
+rich_plot %>% 
+ filter(n_year>30) %>%
+group_by(TAXA) %>% 
+nest() %>% 
+  mutate(model = purrr::map(data, ~TukeyHSD(aov(richness ~ CLIMATE, data=.x))),
+         coefs = purrr::map(model, tidy, conf.int = F)) %>% 
+  unnest(coefs)
+```
+
+We can also nest the data by different groups, i.e. `taxa` and `study id`, in order to perform a different model for each study site and taxa.
+
+```{r}
+
+rich_plot %>% 
+  filter(n_year>30) %>%
+group_by(TAXA,id) %>% 
+nest() %>% 
+  mutate(model = map(data, ~gam(richness ~ s(year, bs = "cs",k=-1), data=.x)),
+         coefs = map(model, tidy, conf.int = TRUE),
+         Rsq = map_dbl(model, ~summary(.)$r.sq)) %>% 
+  unnest(coefs)
+
+```
+
+Just for information, if you are using the latest version of `dplyr` (1.0.0), you can use `nest_by()` instead of `group_by()` and `nest()`. With this approach we skip using `mutate` and `map` and use `summarise()` instead.
+
+```{r}
+
+rich_plot %>% 
+  filter(n_year>30, CLIMATE=="Temperate") %>%
+  ungroup %>% 
+nest_by(TAXA,id) %>% 
+mutate(model = list(gam(richness ~ s(year, bs = "cs",k=-1), data=data))) %>% 
+summarise(tidy(model, conf.int = TRUE))# %>% 
+
+
+
+```
+
+# Generating tables from model output
+
+As I said before, with `broom` we can perform the models and report organized tables. We don't need to copy and paste the output, risking to mess up the results. Also, if the analysis change we don't have to delete the old tables, we simply generate a new one.
+
+```{r}
+library(pander)
+
+model_tab<-rich_plot %>% 
+  filter(n_year>30, CLIMATE=="Temperate") %>%
+  ungroup %>% 
+nest_by(TAXA,id) %>% 
+mutate(model = list(gam(richness ~ s(year, bs = "cs",k=-1), data=data))) %>% 
+summarise(tidy(model, conf.int = TRUE))
+
+pander(model_tab)
+```
+
+# Bootstrap with `modelr`
+
+We can try to perform a bootstrap (a few times) and visualize how the species richness of different taxa is changing over time.
+
+```{r}
+
+
+boots_rich <- rich_plot %>% 
+  filter(n_year>30, CLIMATE=="Temperate") %>%
+  ungroup %>% 
+  group_by(TAXA,id) %>% 
+  do(rs = modelr::bootstrap(., 10)) %>% 
+  unnest(rs) %>% 
+  group_by(TAXA,id,.id) %>% 
+  nest() %>% 
+  mutate(model = map(data, ~augment(gam(richness ~ s(year, bs="cs", k=-1),
+                                         family = poisson(link="log"),
+                                           data = as.data.frame(.$strap))))) %>% 
+  unnest(model)
+  
+
+
+```
+
+We have taxa, study id and `.id` representing each bootstrap.
+
+```{r}
+boots_rich
+```
+
+Using `mutate()` we can get both upper and lower confidence intervals
+
+```{r}
+
+boots_ci <- boots_rich %>%
+  mutate(lower = .fitted - 1.96 * .se.fit,
+upper = .fitted + 1.96 * .se.fit)
+
+```
+
+Visualize confidence intervals with `geom_ribbon()`.
+
+```{r}
+upper_lower <- boots_ci %>% 
+    ungroup() %>% 
+  group_by(TAXA) %>% 
+  nest() %>% 
+  mutate(plot = map2(data, TAXA, ~ggplot(data = .x, aes(x=year, y = .fitted, , fill = as.factor(id)))+
+  geom_point(alpha=.005)+
+  geom_ribbon(aes(ymin=lower, ymax=upper, group=interaction(.id, as.factor(id))),linetype=0,alpha=0.2)+
+  ggtitle(glue("Species richness change of {.y} over time"))+
+  labs(subtitle =  "Ribbon shows 95% bootstrapped percentile confidence interval",
+       fill = "Study ID",
+       y = "log(Species richness)")+
+    guides(fill = guide_legend(override.aes = list(alpha = 1)))))
+  
+```
+
+We can store each plot as an object
+
+```{r}
+
+
+boots_birds <- upper_lower$plot[[1]]
+
+boots_fish <- upper_lower$plot[[2]]+coord_cartesian(ylim = c(-5,6))
+
+boots_marine<- upper_lower$plot[[3]]
+
+boots_plants<- upper_lower$plot[[4]]
+```
+
+And combine them with `cowplot::plot_grid()`
+
+```{r}
+library(cowplot)
+plot_grid(boots_birds, boots_fish,
+          boots_marine, boots_plants, ncol=2, nrow=2)
+
+```
+
+Well.. some studies seem to be 💩 fitted, others not that much. Next step, I'd check the estimates of our bootstraps, explore a bit more those well fitted models, and try to improve the bad ones.
+
+I'm still a beginner in `tidymodels`. If you are interested in learning more about tidymodels / predictions / bootstraps etc, I recommend following [Julia Silge's channel on youtube](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA).
+
+If you find any mistakes, have suggestions or queries, please just drop me a DM on twitter or leave a comment here (hope it is working now 😄).
+
+![](https://media.giphy.com/media/7itDy9n1794vC/giphy.gif)

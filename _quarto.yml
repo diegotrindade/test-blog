@@ -1,0 +1,30 @@
+project:
+  type: website
+
+execute:
+  freeze: auto
+  
+website:
+  title: "Diego P.F. Trindade"
+  navbar:
+    left:
+      - href: about.qmd
+        text: Home
+      - index.qmd
+      - href: publications.qmd
+        text: Publications
+      
+      
+format:
+  html:
+    theme: 
+      light: minty
+      dark: slate
+    css: styles.css
+    toc: true
+
+editor: visual
+
+
+
+

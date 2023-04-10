@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Diego P.F. Trindade">
+<meta name="dcterms.date" content="2020-07-15">
+
+<title>Diego P.F. Trindade - #1 Data wrangling in ecology with tidyverse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Diego P.F. Trindade</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">#1 Data wrangling in ecology with <code>tidyverse</code></h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Diego P.F. Trindade </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 15, 2020</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#here-package" id="toc-here-package" class="nav-link active" data-scroll-target="#here-package"><code>here</code> package</a></li>
+  <li><a href="#file-size" id="toc-file-size" class="nav-link" data-scroll-target="#file-size">File size</a></li>
+  <li><a href="#vroom" id="toc-vroom" class="nav-link" data-scroll-target="#vroom"><code>vroom</code></a></li>
+  <li><a href="#cleaning-and-exploring-biotime-with-dplyr" id="toc-cleaning-and-exploring-biotime-with-dplyr" class="nav-link" data-scroll-target="#cleaning-and-exploring-biotime-with-dplyr">Cleaning and exploring BioTime with <code>dplyr</code></a></li>
+  <li><a href="#tidyr---the-art-of-pivoting-data" id="toc-tidyr---the-art-of-pivoting-data" class="nav-link" data-scroll-target="#tidyr---the-art-of-pivoting-data"><code>tidyr</code> - the art of pivoting data</a></li>
+  <li><a href="#merging-data-and-working-within-lists-with-purrr" id="toc-merging-data-and-working-within-lists-with-purrr" class="nav-link" data-scroll-target="#merging-data-and-working-within-lists-with-purrr">Merging data and working within lists with <code>purrr</code></a></li>
+  <li><a href="#some-other-tricks-with-purrr" id="toc-some-other-tricks-with-purrr" class="nav-link" data-scroll-target="#some-other-tricks-with-purrr">Some other tricks with <code>purrr</code></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(c("here", "dplyr", "vroom", "tidyr", "purrr"))</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vroom)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The amount of data becoming available in ecology has been increasing rather fast in the recent years. Therefore, being able to wrangling, analyzing and visualizing this data, associated with a good scientific question, is timely for ecologists. Here, I will introduce some <code>tidyverse</code> packages and functions that can make this part of the job a bit easier.</p>
+<p>Most information I will present here was gotten from our outstanding R community (<a href="https://stackoverflow.com">StackOverflow</a>, <a href="https://github.com">GitHub</a>, <a href="https://twitter.com/search?q=%23rstats&amp;src=typed_query&amp;f=live">Twitter posts - #rstats -</a> and R books), based on daily issues faced during my PhD. Also, everything here can be achieved by using base R. However, some <code>tidyverse</code> packages can be helpful to avoid unnecessary loops and functions, saving some lines of code and time. The intention of this post is, therefore, to show some useful functions that can facilitate our life but also to gather information in one place for my own purpose :).</p>
+<p>In this post, I will be using the <strong>BioTime</strong> database as an example, which is a biodiversity time series data with multiple taxa and several sites around the world (more details at: http://biotime.st-andrews.ac.uk/). I anticipate that this is not an extensive analysis of the data but just an example of how we can use some <code>tidyverse</code> packages and functions to any data we want. <strong>Please download both data and metadata, in case you want to follow this post.</strong></p>
+<p>This post is split into three parts:</p>
+<ul>
+<li><p>1st: Presenting <code>here</code>, <code>archive</code> and <code>vroom</code> packages and how to wrangling/exploring data with <code>dplyr</code> and <code>purrr</code></p></li>
+<li><p>2nd: Data visualization with <code>ggplot2</code> and <code>cowplot</code></p></li>
+<li><p>3rd: Statistical modelling and bootstraps with <code>tidymodels::broom</code></p></li>
+</ul>
+<section id="here-package" class="level1">
+<h1><code>here</code> package</h1>
+<p>For those using R projects, <code>here</code> is quite handy. With <code>here</code> we don’t need to set our working directory <code>(setwd)</code> anymore. This is particularly interesting whether we are collaborating and have to share our scripts and data with colleagues or need to read files saved at different folders and work on different computers. When using <code>here</code> we only need to set the path where the files are saved within the R project:</p>
+<p>For example, let’s say the project is in <strong>“MyFolder”</strong> and the data in <strong>“data”</strong>. Using the traditional way, before starting working on the data, we would have to set up the working directory:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:\Users\yourname\Desktop\MyFolder\data"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>myfile <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"myfile.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With <code>here</code>, instead of setting the working directory <code>(setwd)</code> and read the file afterwards (<code>read.csv</code>), we can go straight to the file part.</p>
+<p>For instance, the project is in <strong>“MyFolder”</strong> and we saved your file in <strong>“data”</strong>. You can simply read your file as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>myfile <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"myfile.csv"</span>), <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">";"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>or</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>myfile <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data\myfile.csv"</span>, <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">";"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you have a file in a folder within the “data” folder you just need to add this new “path”:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>myfile2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"differentfolder"</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"mysecondfile.csv"</span>), <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can use this for everything you want and it helps to keep files organized within your project. For instance, to save figures, you simply create a new folder to store figures and change the path (i.e.&nbsp;“data” by “figures”):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"figures"</span>, <span class="at">file =</span> <span class="st">"fig1.png"</span>), fig_object)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="file-size" class="level1">
+<h1>File size</h1>
+<p>Specially if you are storing your projects on GitHub, large files can be annoying, since GitHub allows us to store files up to 100 mb. To tackle this issue, we can either use the lfs storage method (more details at: https://git-lfs.github.com) or compress the data as <code>.zip</code> or <code>.gz</code> files. Sometimes, though, the file is too large that even after compressing it, you still need to use the lsf method to push it to GitHub - which is the biotime case. Anyway, it is good to know how to compress your files in case you need it for a different data.</p>
+<p>There are different ways to do that in R. I’m going to use here the <code>archive</code> package. This package is a good alternative for both compressing and reading data.</p>
+<p>As the biotime file is already zipped, let’s use the metadata as an example.</p>
+<p>First we read the file</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"posts"</span>, </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"biotime_meta.csv"</span>), <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">","</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Note that I’m using the path where my project is saved at.</li>
+</ul>
+<p>To compress this file you have to use the <code>archive_write</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#renv::install("archive")</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(archive)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(metadata, <span class="fu">archive_write</span>(<span class="st">"metadata.zip"</span>, <span class="st">"metadata.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I saved the file as <em>.zip</em>, but you can use <em>.gz</em> or other formats. More information at: https://github.com/jimhester/archive</p>
+<p>The biotime file is already compressed (134 mb). If you extract the .csv, the size will increase to more than 1gb. Working with compressed files can save a lot of time and space when pushing it to GitHub, as I said before.</p>
+</section>
+<section id="vroom" class="level1">
+<h1><code>vroom</code></h1>
+<p>If you don’t want to extract the .csv file but read it in the compressed format (e.g.&nbsp;<em>.zip</em>, <em>.gz</em> etc), there are different ways to do so. I’m going to use the <code>vroom</code> package to do the job (faster) - other options would be <code>readr</code> package or <code>fread()</code> function in <code>data.table</code> package.</p>
+<p>For reading the .zip file we simply change from <code>read.csv</code>(base R) to <code>vroom</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_dev("vroom")</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vroom)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>biotime_df <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="fu">here</span>(<span class="st">"posts"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"biotime.zip"</span>), <span class="at">delim =</span> <span class="st">","</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>biotime_metadata <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="fu">here</span>(<span class="st">"posts"</span>, </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"biotime_meta.csv"</span>), <span class="at">delim =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cleaning-and-exploring-biotime-with-dplyr" class="level1">
+<h1>Cleaning and exploring BioTime with <code>dplyr</code></h1>
+<p><code>dplyr</code> is a very useful package to clean and explore data in R. I’m not going to spend much time talking about this package because there are many other great material available out there. Rather, I will just show some important functions, specially for beginner users. You can check a detailed information about this package at: https://dplyr.tidyverse.org</p>
+<p>With <code>dplyr</code> we can select and rename columns, filter lines, create new variables and make plenty of cool/complex stuff. Throughout this post, I’m going to use mostly <code>select</code>, <code>filter</code>, <code>group_by</code> and <code>mutate/summarize</code>.</p>
+<p>Let’s start by cleaning both data and metadata using some <code>dplyr</code> functions. There are many columns in both files and I’m going to select only those I’m interested in. For that, we can use <code>select</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="ot">&lt;-</span> biotime_df <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">id =</span> STUDY_ID, <span class="at">year =</span> YEAR, <span class="at">plot =</span> PLOT, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">abundance =</span> sum.allrawdata.ABUNDANCE, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">biomass =</span> sum.allrawdata.BIOMASS, <span class="at">sp =</span> GENUS_SPECIES)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> biotime_metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(STUDY_ID<span class="sc">:</span>ORGANISMS, CENT_LAT, CENT_LONG) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> STUDY_ID)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you are not used to dplyr, this <code>%&gt;%</code> is called <em>pipe</em>, and we can use it to nest our functions. We first select the object we want, then use the <code>%&gt;%</code> to nest more functions, separating each one by a new pipe, like I did to create the <code>metadata</code> object.</p>
+<p>Now, in biotime object, we have species’ name, abundance, plot, year and site.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(biotime)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+     id  year plot  abundance biomass sp             
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;          
+1    10  1984 12            1       0 Acer rubrum    
+2    10  1984 12            3       0 Acer saccharum 
+3    10  1984 12            1       0 Acer spicatum  
+4    10  1984 12           12       0 Corylus cornuta
+5    10  1984 12            1       0 Populus pinnata
+6    10  1984 12           20       0 Acer rubrum    </code></pre>
+</div>
+</div>
+<p>Whereas in metadata we have realm, taxa, habitat, whether the area is protected or not etc.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(biotime_metadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 38
+  STUDY_ID REALM  CLIMATE HABITAT PROTECTED_AREA BIOME_MAP TAXA  ORGANISMS TITLE
+     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;
+1       10 Terre… Temper… Woodla… FALSE          Temperat… Terr… woody pl… Wind…
+2       18 Terre… Temper… Sagebr… FALSE          Deserts … Terr… sagebrus… Mapp…
+3       33 Marine Temper… Seawee… FALSE          Temperat… Mari… phytopla… Long…
+4       39 Terre… Temper… Decidu… FALSE          Temperat… Birds birds     Bird…
+5       41 Terre… Temper… Woodla… FALSE          Temperat… Birds birds     Time…
+6       45 Marine Tropic… Reef    FALSE          Tropical… Fish  tropical… MCR …
+# ℹ 29 more variables: AB_BIO &lt;chr&gt;, HAS_PLOT &lt;chr&gt;, DATA_POINTS &lt;dbl&gt;,
+#   START_YEAR &lt;dbl&gt;, END_YEAR &lt;dbl&gt;, CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;,
+#   NUMBER_OF_SPECIES &lt;dbl&gt;, NUMBER_OF_SAMPLES &lt;dbl&gt;, NUMBER_LAT_LONG &lt;dbl&gt;,
+#   TOTAL &lt;dbl&gt;, GRAIN_SIZE_TEXT &lt;chr&gt;, GRAIN_SQ_KM &lt;dbl&gt;, AREA_SQ_KM &lt;dbl&gt;,
+#   CONTACT_1 &lt;chr&gt;, CONTACT_2 &lt;chr&gt;, CONT_1_MAIL &lt;chr&gt;, CONT_2_MAIL &lt;chr&gt;,
+#   LICENSE &lt;chr&gt;, WEB_LINK &lt;chr&gt;, DATA_SOURCE &lt;chr&gt;, METHODS &lt;chr&gt;,
+#   SUMMARY_METHODS &lt;chr&gt;, LINK_ID &lt;dbl&gt;, COMMENTS &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<ul>
+<li>Note that, in biotime object, I took the opportunity and renamed the columns within <code>select</code>. You can also use <code>rename</code> if you want (as I did in metadata object). Also, if you have to rename/fix several column names, you can use the <a href="https://github.com/sfirke/janitor"><code>janitor</code></a> package.</li>
+</ul>
+<p>We use <code>select</code> for columns and <code>filter</code> for rows. Let´s say we are interested only in <em>Terrestrial plants</em> from the metadata. We can go for:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(TAXA <span class="sc">==</span> <span class="st">"Terrestrial plants"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+     id REALM  CLIMATE HABITAT PROTECTED_AREA BIOME_MAP TAXA  ORGANISMS CENT_LAT
+  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
+1    10 Terre… Temper… Woodla… FALSE          Temperat… Terr… woody pl…    47.4 
+2    18 Terre… Temper… Sagebr… FALSE          Deserts … Terr… sagebrus…    44.3 
+3    60 Terre… Tropic… Tropic… FALSE          Tropical… Terr… tropical…     9.15
+4   201 Terre… Tropic… Tropic… FALSE          Tropical… Terr… Tropical…     2.98
+5   202 Terre… Tropic… Tropic… FALSE          Tropical… Terr… Tropical…    11.6 
+6   214 Terre… Temper… Conife… FALSE          Temperat… Terr… Trees        45.3 
+# ℹ 1 more variable: CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Of course we can add more arguments to the <code>filter</code>, for example, only terrestrial plants in tropical climate and so on.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(TAXA <span class="sc">==</span> <span class="st">"Terrestrial plants"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>       CLIMATE <span class="sc">==</span> <span class="st">"Tropical"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+     id REALM  CLIMATE HABITAT PROTECTED_AREA BIOME_MAP TAXA  ORGANISMS CENT_LAT
+  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
+1    60 Terre… Tropic… Tropic… FALSE          Tropical… Terr… tropical…     9.15
+2   201 Terre… Tropic… Tropic… FALSE          Tropical… Terr… Tropical…     2.98
+3   202 Terre… Tropic… Tropic… FALSE          Tropical… Terr… Tropical…    11.6 
+4   241 Terre… Tropic… Tropic… FALSE          Tropical… Terr… Woody pl…     9.36
+5   302 Terre… Tropic… Semi d… TRUE           Tropical… Terr… Trees       -22.4 
+6   322 Terre… Tropic… Semi d… TRUE           Tropical… Terr… Trees       -22.8 
+# ℹ 1 more variable: CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>We can also do the opposite (filter rows out), adding <code>!</code> to the column’s name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(<span class="sc">!</span>TAXA <span class="sc">==</span> <span class="st">"Terrestrial plants"</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>       <span class="sc">!</span>CLIMATE <span class="sc">==</span> <span class="st">"Tropical"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+     id REALM  CLIMATE HABITAT PROTECTED_AREA BIOME_MAP TAXA  ORGANISMS CENT_LAT
+  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
+1    33 Marine Temper… Seawee… FALSE          Temperat… Mari… phytopla…     50.2
+2    39 Terre… Temper… Decidu… FALSE          Temperat… Birds birds         43.9
+3    41 Terre… Temper… Woodla… FALSE          Temperat… Birds birds         39.5
+4    46 Terre… Temper… Woodla… FALSE          Temperat… Birds breeding…     51.7
+5    47 Terre… Temper… Ponds   FALSE          Temperat… Birds ducks         50.8
+6    51 Terre… Temper… Woodla… FALSE          Boreal f… Birds tetraoni…     61.9
+# ℹ 1 more variable: CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>We can filter values higher or lower than:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(id <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+     id REALM  CLIMATE HABITAT PROTECTED_AREA BIOME_MAP TAXA  ORGANISMS CENT_LAT
+  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
+1   108 Marine Global  Oceani… FALSE          Multiple… Birds birds       -27.2 
+2   110 Marine Temper… Estuar… FALSE          Temperat… Bent… Benthos      55.5 
+3   112 Marine Temper… Pelagi… FALSE          Multiple… Fish  pelagic …    25.0 
+4   113 Marine Global  Oceani… FALSE          Multiple… Mari… marine i…     2.70
+5   117 Marine Temper… Tidal … FALSE          Temperat… Mari… Starfish    -39.4 
+6   119 Marine Temper… Pelagi… FALSE          Temperat… Fish  Fish         44.0 
+# ℹ 1 more variable: CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Sometimes we need to filter several specific rows. For that, we use <code>%in%</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(TAXA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Terrestrial plants"</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Birds"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Fish"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+     id REALM  CLIMATE HABITAT PROTECTED_AREA BIOME_MAP TAXA  ORGANISMS CENT_LAT
+  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
+1    10 Terre… Temper… Woodla… FALSE          Temperat… Terr… woody pl…     47.4
+2    18 Terre… Temper… Sagebr… FALSE          Deserts … Terr… sagebrus…     44.3
+3    39 Terre… Temper… Decidu… FALSE          Temperat… Birds birds         43.9
+4    41 Terre… Temper… Woodla… FALSE          Temperat… Birds birds         39.5
+5    45 Marine Tropic… Reef    FALSE          Tropical… Fish  tropical…    -17.5
+6    46 Terre… Temper… Woodla… FALSE          Temperat… Birds breeding…     51.7
+# ℹ 1 more variable: CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Besides selecting columns and filtering rows we can also create new columns with <code>mutate</code>. Let’s filter only the study number 10 and create a new column to check how many species and years they have sampled in this study. We can use <code>mutate</code> and <code>n_distinct()</code> to achieve that.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_sp =</span> <span class="fu">n_distinct</span>(sp),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">total_y =</span> <span class="fu">n_distinct</span>(year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,406 × 8
+      id  year plot  abundance biomass sp                     total_sp total_y
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                     &lt;int&gt;   &lt;int&gt;
+ 1    10  1984 12            1       0 Acer rubrum                  25       3
+ 2    10  1984 12            3       0 Acer saccharum               25       3
+ 3    10  1984 12            1       0 Acer spicatum                25       3
+ 4    10  1984 12           12       0 Corylus cornuta              25       3
+ 5    10  1984 12            1       0 Populus pinnata              25       3
+ 6    10  1984 12           20       0 Acer rubrum                  25       3
+ 7    10  1984 12           14       0 Acer saccharum               25       3
+ 8    10  1984 12            1       0 Toxicodendron radicans       25       3
+ 9    10  1984 12            5       0 Acer spicatum                25       3
+10    10  1984 12            7       0 Corylus cornuta              25       3
+# ℹ 1,396 more rows</code></pre>
+</div>
+</div>
+<p>In this study we have 25 species and three different years.</p>
+<p>Now let’s say we want to know how many species we have per year. To get that, we can use the function <code>group_by</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_sp =</span> <span class="fu">n_distinct</span>(sp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,406 × 7
+# Groups:   year [3]
+      id  year plot  abundance biomass sp                     total_sp
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                     &lt;int&gt;
+ 1    10  1984 12            1       0 Acer rubrum                  22
+ 2    10  1984 12            3       0 Acer saccharum               22
+ 3    10  1984 12            1       0 Acer spicatum                22
+ 4    10  1984 12           12       0 Corylus cornuta              22
+ 5    10  1984 12            1       0 Populus pinnata              22
+ 6    10  1984 12           20       0 Acer rubrum                  22
+ 7    10  1984 12           14       0 Acer saccharum               22
+ 8    10  1984 12            1       0 Toxicodendron radicans       22
+ 9    10  1984 12            5       0 Acer spicatum                22
+10    10  1984 12            7       0 Corylus cornuta              22
+# ℹ 1,396 more rows</code></pre>
+</div>
+</div>
+<p>We can see that we have 22 species in 1984, 20 species in 1992, we can’t see the third year though. That’s because <code>mutate</code> creates a new column and repeats the values for each row we have. To get a summarized overview, we can use <code>summarise</code> instead.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_sp =</span> <span class="fu">n_distinct</span>(sp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+   year total_sp
+  &lt;dbl&gt;    &lt;int&gt;
+1  1984       22
+2  1992       20
+3  1996       20</code></pre>
+</div>
+</div>
+<p>Now we can see the number of species per year, but the other columns were deleted. Therefore, both mutate and summaries give us the same result but in different ways, you have to choose which one fits better your purpose when dealing with the data.</p>
+<p>We can also combine <code>summarise</code> and <code>mutate</code> to get, for example, the frequency of species</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sp) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span> (<span class="at">total =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> total <span class="sc">/</span> <span class="fu">sum</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 25 × 3
+   sp                  total     freq
+   &lt;chr&gt;               &lt;int&gt;    &lt;dbl&gt;
+ 1 Acer rubrum           185 0.132   
+ 2 Acer saccharum        290 0.206   
+ 3 Acer spicatum         146 0.104   
+ 4 Amelanchier gravida     1 0.000711
+ 5 Amelanchier laevis     30 0.0213  
+ 6 Betula papyrifera      10 0.00711 
+ 7 Cornus racemosa         6 0.00427 
+ 8 Cornus rugosa          35 0.0249  
+ 9 Corylus cornuta       244 0.174   
+10 Diervilla lonicera     14 0.00996 
+# ℹ 15 more rows</code></pre>
+</div>
+</div>
+<p>Note that I’ve grouped by “species”. We could also check the frequency of each species per year, adding the variable “year” in <code>group_by()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sp,year) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span> (<span class="at">total =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> total <span class="sc">/</span> <span class="fu">sum</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 4
+# Groups:   sp [25]
+   sp                   year total  freq
+   &lt;chr&gt;               &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+ 1 Acer rubrum          1984    77 0.416
+ 2 Acer rubrum          1992    68 0.368
+ 3 Acer rubrum          1996    40 0.216
+ 4 Acer saccharum       1984   105 0.362
+ 5 Acer saccharum       1992   109 0.376
+ 6 Acer saccharum       1996    76 0.262
+ 7 Acer spicatum        1984    62 0.425
+ 8 Acer spicatum        1992    55 0.377
+ 9 Acer spicatum        1996    29 0.199
+10 Amelanchier gravida  1984     1 1    
+# ℹ 52 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="tidyr---the-art-of-pivoting-data" class="level1">
+<h1><code>tidyr</code> - the art of pivoting data</h1>
+<p>As ecologists, we have to deal with data frames either in long or wide formats all the time. Knowing how to transform the data into both formats, in R, is very handy and safe, because we don’t need to create several .csv files, maintaining the original data intact, decreasing the chances of messing up it.</p>
+<p>The most important functions to transform data frames in <code>tidy</code> are <code>pivot_longer()</code> and <code>pivot_wider()</code>. These functions have been improved constantly. Out there, you will find <code>reshape2</code> package, <code>melt</code>, <code>spread</code> and <code>gather</code>. Those are the old school functions to transform data frames. I’m slowly moving from <code>spread</code>/<code>gather</code> into <code>pivot_wider()</code>/<code>pivot_longer()</code>. Then, let’s try to transform our data into both wide and long formats using the new functions.</p>
+<p>Let’s use the same example (study id 10) to transform the data into the wide format. We use <code>pivot_wider()</code>, specifying that the species names present in “sp” column will be the columns of the new object (<code>names_from = "sp"</code>) and the values present in “abundance” will be the row values (<code>values_from = "abundance"</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"sp"</span>, <span class="at">values_from =</span> <span class="st">"abundance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 47 × 29
+      id  year plot  biomass `Acer rubrum` `Acer saccharum` `Acer spicatum`
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;list&gt;        &lt;list&gt;           &lt;list&gt;         
+ 1    10  1984 12          0 &lt;dbl [4]&gt;     &lt;dbl [3]&gt;        &lt;dbl [2]&gt;      
+ 2    10  1984 1           0 &lt;dbl [4]&gt;     &lt;dbl [4]&gt;        &lt;dbl [4]&gt;      
+ 3    10  1984 2           0 &lt;dbl [4]&gt;     &lt;dbl [8]&gt;        &lt;dbl [8]&gt;      
+ 4    10  1984 34          0 &lt;dbl [4]&gt;     &lt;dbl [6]&gt;        &lt;dbl [8]&gt;      
+ 5    10  1984 35          0 &lt;dbl [4]&gt;     &lt;dbl [10]&gt;       &lt;dbl [5]&gt;      
+ 6    10  1984 36          0 &lt;dbl [4]&gt;     &lt;dbl [8]&gt;        &lt;NULL&gt;         
+ 7    10  1984 37          0 &lt;dbl [3]&gt;     &lt;dbl [10]&gt;       &lt;NULL&gt;         
+ 8    10  1984 38          0 &lt;dbl [4]&gt;     &lt;dbl [6]&gt;        &lt;NULL&gt;         
+ 9    10  1984 39          0 &lt;dbl [3]&gt;     &lt;dbl [4]&gt;        &lt;NULL&gt;         
+10    10  1984 40          0 &lt;dbl [2]&gt;     &lt;dbl [2]&gt;        &lt;dbl [6]&gt;      
+# ℹ 37 more rows
+# ℹ 22 more variables: `Corylus cornuta` &lt;list&gt;, `Populus pinnata` &lt;list&gt;,
+#   `Toxicodendron radicans` &lt;list&gt;, `Diervilla lonicera` &lt;list&gt;,
+#   `Populus sp` &lt;list&gt;, `Cornus rugosa` &lt;list&gt;, `Prunus virginiana` &lt;list&gt;,
+#   `Rubus flagellaris` &lt;list&gt;, `Viburnum rafinesquianum` &lt;list&gt;,
+#   `Quercus rubra` &lt;list&gt;, `Vaccinium angustifolium` &lt;list&gt;,
+#   `Pinus strobus` &lt;list&gt;, `Ostrya virginiana` &lt;list&gt;, …</code></pre>
+</div>
+</div>
+<p>Oops.. something went wrong. It transformed our data frame but in an odd way. The warning says that our data is not uniquely identified, meaning that the function can’t recognize each row, separately, in our data frame. To tackle this issue, we can simply bring the row names to a column, identifying each row, with the function <code>rownames_to_column()</code>. Let´s try again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"sp"</span>, <span class="at">values_from =</span> <span class="st">"abundance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,406 × 30
+   rowname    id  year plot  biomass `Acer rubrum` `Acer saccharum`
+   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+ 1 1          10  1984 12          0             1               NA
+ 2 2          10  1984 12          0            NA                3
+ 3 3          10  1984 12          0            NA               NA
+ 4 4          10  1984 12          0            NA               NA
+ 5 5          10  1984 12          0            NA               NA
+ 6 6          10  1984 12          0            20               NA
+ 7 7          10  1984 12          0            NA               14
+ 8 8          10  1984 12          0            NA               NA
+ 9 9          10  1984 12          0            NA               NA
+10 10         10  1984 12          0            NA               NA
+# ℹ 1,396 more rows
+# ℹ 23 more variables: `Acer spicatum` &lt;dbl&gt;, `Corylus cornuta` &lt;dbl&gt;,
+#   `Populus pinnata` &lt;dbl&gt;, `Toxicodendron radicans` &lt;dbl&gt;,
+#   `Diervilla lonicera` &lt;dbl&gt;, `Populus sp` &lt;dbl&gt;, `Cornus rugosa` &lt;dbl&gt;,
+#   `Prunus virginiana` &lt;dbl&gt;, `Rubus flagellaris` &lt;dbl&gt;,
+#   `Viburnum rafinesquianum` &lt;dbl&gt;, `Quercus rubra` &lt;dbl&gt;,
+#   `Vaccinium angustifolium` &lt;dbl&gt;, `Pinus strobus` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Ok. It seems we are getting closer. Now we have the study 10 data frame in the wide format but when the species is absent we have NA’s. To tackle this, we add the argument <code>values_fill</code> to our <code>pivot_wider()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"sp"</span>, <span class="at">values_from =</span> <span class="st">"abundance"</span>, </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="fu">list</span>(<span class="at">abundance=</span><span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,406 × 30
+   rowname    id  year plot  biomass `Acer rubrum` `Acer saccharum`
+   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+ 1 1          10  1984 12          0             1                0
+ 2 2          10  1984 12          0             0                3
+ 3 3          10  1984 12          0             0                0
+ 4 4          10  1984 12          0             0                0
+ 5 5          10  1984 12          0             0                0
+ 6 6          10  1984 12          0            20                0
+ 7 7          10  1984 12          0             0               14
+ 8 8          10  1984 12          0             0                0
+ 9 9          10  1984 12          0             0                0
+10 10         10  1984 12          0             0                0
+# ℹ 1,396 more rows
+# ℹ 23 more variables: `Acer spicatum` &lt;dbl&gt;, `Corylus cornuta` &lt;dbl&gt;,
+#   `Populus pinnata` &lt;dbl&gt;, `Toxicodendron radicans` &lt;dbl&gt;,
+#   `Diervilla lonicera` &lt;dbl&gt;, `Populus sp` &lt;dbl&gt;, `Cornus rugosa` &lt;dbl&gt;,
+#   `Prunus virginiana` &lt;dbl&gt;, `Rubus flagellaris` &lt;dbl&gt;,
+#   `Viburnum rafinesquianum` &lt;dbl&gt;, `Quercus rubra` &lt;dbl&gt;,
+#   `Vaccinium angustifolium` &lt;dbl&gt;, `Pinus strobus` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Now we have the data transformed into the wide format, with 0’s instead of NA’s. Note that, sometimes, the row names are names instead of numbers (i.e.&nbsp;sometimes we use species names as row names). If you face that, you can create a new column, labeling the rows, using <code>mutate()</code> and <code>row_number()</code> instead of <code>rownames_to_column()</code>. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>biotime_wider <span class="ot">&lt;-</span> biotime <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rownames_to_column() %&gt;% </span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id_rows =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"sp"</span>, <span class="at">values_from =</span> <span class="st">"abundance"</span>, <span class="at">values_fill =</span> <span class="fu">list</span>(<span class="at">abundance=</span><span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now let´s transform our data into the other way round, from wide into long format. For that, we can use the function <code>pivot_longer()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>biotime_wider <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"sp"</span>, <span class="at">values_to =</span> <span class="st">"abundance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `pivot_longer()`:
+! `cols` must select at least one column.</code></pre>
+</div>
+</div>
+<p>Error. When pivoting longer, we have to pay attention to the other columns we may have. In the <code>biotime_wider</code> object we have <code>id</code>, <code>year</code>, <code>plot</code>, <code>biomass</code>, <code>id_rows</code> and <code>species names</code>. We want to transform only <code>species names</code> and <code>values</code> (abundance) though. In this case, we have to omit the other columns we don’t want to transform.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>biotime_wider <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(id<span class="sc">:</span>id_rows),<span class="at">names_to =</span> <span class="st">"sp"</span>, <span class="at">values_to =</span> <span class="st">"abundance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35,150 × 7
+      id  year plot  biomass id_rows sp                     abundance
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;                      &lt;dbl&gt;
+ 1    10  1984 12          0       1 Acer rubrum                    1
+ 2    10  1984 12          0       1 Acer saccharum                 0
+ 3    10  1984 12          0       1 Acer spicatum                  0
+ 4    10  1984 12          0       1 Corylus cornuta                0
+ 5    10  1984 12          0       1 Populus pinnata                0
+ 6    10  1984 12          0       1 Toxicodendron radicans         0
+ 7    10  1984 12          0       1 Diervilla lonicera             0
+ 8    10  1984 12          0       1 Populus sp                     0
+ 9    10  1984 12          0       1 Cornus rugosa                  0
+10    10  1984 12          0       1 Prunus virginiana              0
+# ℹ 35,140 more rows</code></pre>
+</div>
+</div>
+<p>With <code>pivot_longer()</code> and <code>pivot_wider()</code> you can make a lot of more complex transformations, I’m not going to cover those here though, please check them out at: https://tidyr.tidyverse.org/reference/pivot_wider.html</p>
+</section>
+<section id="merging-data-and-working-within-lists-with-purrr" class="level1">
+<h1>Merging data and working within lists with <code>purrr</code></h1>
+<p>Now let´s try to use this knowledge to create more complex objects, using new features, combining functions etc.</p>
+<p>When analyzing ecological data, most of the time, both data and metadata are useful, like in <code>BioTime</code> example.</p>
+<p>Let’s check both data frames</p>
+<p><em>BioTime data</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(biotime)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+     id  year plot  abundance biomass sp             
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;          
+1    10  1984 12            1       0 Acer rubrum    
+2    10  1984 12            3       0 Acer saccharum 
+3    10  1984 12            1       0 Acer spicatum  
+4    10  1984 12           12       0 Corylus cornuta
+5    10  1984 12            1       0 Populus pinnata
+6    10  1984 12           20       0 Acer rubrum    </code></pre>
+</div>
+</div>
+<p><em>Metadata</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+     id REALM  CLIMATE HABITAT PROTECTED_AREA BIOME_MAP TAXA  ORGANISMS CENT_LAT
+  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;
+1    10 Terre… Temper… Woodla… FALSE          Temperat… Terr… woody pl…     47.4
+2    18 Terre… Temper… Sagebr… FALSE          Deserts … Terr… sagebrus…     44.3
+3    33 Marine Temper… Seawee… FALSE          Temperat… Mari… phytopla…     50.2
+4    39 Terre… Temper… Decidu… FALSE          Temperat… Birds birds         43.9
+5    41 Terre… Temper… Woodla… FALSE          Temperat… Birds birds         39.5
+6    45 Marine Tropic… Reef    FALSE          Tropical… Fish  tropical…    -17.5
+# ℹ 1 more variable: CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>As you can see, in <em>biotime</em> we have <code>id</code>, <code>year</code>, <code>plot</code>, <code>abundance</code>, <code>biomass</code> and <code>species</code>, whereas in <em>metadata</em> we have <code>id</code>, <code>realm</code>, <code>habitat</code> etc. So, let’s say we are interested in examining terrestrial plants species from tropical forests, but as species are in one data frame and biomes in the other, we first have to merge both data frames. For merging data frames into one we can use either <code>bind_cols() / bind_rows()</code> functions, for binding columns and rows, respectively, or the <code>join family</code> available in <code>dplyr</code> (https://dplyr.tidyverse.org/reference/join.html). Here, we can use the <code>letf_join()</code> option to merge both data and metadata.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>merge_df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(biotime, metadata, <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(merge_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+     id  year plot  abundance biomass sp    REALM CLIMATE HABITAT PROTECTED_AREA
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;         
+1    10  1984 12            1       0 Acer… Terr… Temper… Woodla… FALSE         
+2    10  1984 12            3       0 Acer… Terr… Temper… Woodla… FALSE         
+3    10  1984 12            1       0 Acer… Terr… Temper… Woodla… FALSE         
+4    10  1984 12           12       0 Cory… Terr… Temper… Woodla… FALSE         
+5    10  1984 12            1       0 Popu… Terr… Temper… Woodla… FALSE         
+6    10  1984 12           20       0 Acer… Terr… Temper… Woodla… FALSE         
+# ℹ 5 more variables: BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;, ORGANISMS &lt;chr&gt;,
+#   CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p><code>left_join()</code> merged the data frames based on the study id. This is a safe way to merge data frames because the function will match exactly the same rows present in each data frame based on the argument you give in <code>"by = ..."</code>; in this case I chose <code>by = "id"</code>, but depending on your data you can add more variables.</p>
+<p>Now we have both data and metadata merged. Then, we can finally check terrestrial plant species from tropical forests.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>merge_df <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TAXA <span class="sc">==</span> <span class="st">"Terrestrial plants"</span>,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>       CLIMATE <span class="sc">==</span> <span class="st">"Tropical"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+     id  year plot  abundance biomass sp    REALM CLIMATE HABITAT PROTECTED_AREA
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;         
+1   201  1987 &lt;NA&gt;       2454       0 Aidi… Terr… Tropic… Tropic… FALSE         
+2   201  1987 &lt;NA&gt;         97       0 Fagr… Terr… Tropic… Tropic… FALSE         
+3   201  1987 &lt;NA&gt;        112       0 Fahr… Terr… Tropic… Tropic… FALSE         
+4   201  1987 &lt;NA&gt;         45       0 Ficu… Terr… Tropic… Tropic… FALSE         
+5   201  1987 &lt;NA&gt;       2913       0 Alan… Terr… Tropic… Tropic… FALSE         
+6   201  1987 &lt;NA&gt;          3       0 Ficu… Terr… Tropic… Tropic… FALSE         
+# ℹ 5 more variables: BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;, ORGANISMS &lt;chr&gt;,
+#   CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>or Birds etc</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>merge_df <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(TAXA <span class="sc">==</span> <span class="st">"Birds"</span>,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>       CLIMATE <span class="sc">==</span> <span class="st">"Tropical"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+     id  year plot  abundance biomass sp    REALM CLIMATE HABITAT PROTECTED_AREA
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;         
+1    58  1994 Plot…         2       0 Vire… Terr… Tropic… Long t… FALSE         
+2    58  1991 Plot9         1       0 Paru… Terr… Tropic… Long t… FALSE         
+3    58  1994 Plot…         1       0 Neso… Terr… Tropic… Long t… FALSE         
+4    58  1994 Plot6         7       0 Coer… Terr… Tropic… Long t… FALSE         
+5    58  1991 Plot6         9       0 Neso… Terr… Tropic… Long t… FALSE         
+6    58  1994 Plot6         1       0 Marg… Terr… Tropic… Long t… FALSE         
+# ℹ 5 more variables: BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;, ORGANISMS &lt;chr&gt;,
+#   CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Although those functions are useful to explore big data sets, most of the time, specially when working with multiple variables, filtering each one and examining them separately can be time consuming. For example, let’s say we want to transform our current data frame (merge_df) from long into wide format, as we did before. The first time we transformed our data, we had a single study (id=10) and taxa. Now we have multiple studies and taxa. If we try <code>pivot_wider()</code>, plant and bird species names, for example, will be assigned as columns, making things difficult to disentangle afterwards. An useful way to avoid this is to split our data frame into lists based on each taxa we have. Then, we can apply the function we want for all elements of that list at once. We can do that using the package <code>purrr</code>, which has plenty of functions that make ecologists` life a bit easier in that sense. Let’s try to understand how this package works.</p>
+<p>First, let’s create different lists based on different taxa with the <code>split()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>split_taxa <span class="ot">&lt;-</span> merge_df <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">split</span>(.<span class="sc">$</span>TAXA)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(split_taxa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$All
+# A tibble: 326,527 × 15
+      id  year plot  abundance biomass sp              REALM  CLIMATE HABITAT   
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;     
+ 1   166  1979 &lt;NA&gt;          5       0 Puffinus gravis Marine Global  Oceanic w…
+ 2   166  1979 &lt;NA&gt;          2       0 Puffinus gravis Marine Global  Oceanic w…
+ 3   166  1979 &lt;NA&gt;         15       0 Puffinus gravis Marine Global  Oceanic w…
+ 4   166  1979 &lt;NA&gt;         23       0 Puffinus gravis Marine Global  Oceanic w…
+ 5   166  1979 &lt;NA&gt;         20       0 Puffinus gravis Marine Global  Oceanic w…
+ 6   166  1979 &lt;NA&gt;         20       0 Puffinus gravis Marine Global  Oceanic w…
+ 7   166  1979 &lt;NA&gt;         60       0 Puffinus gravis Marine Global  Oceanic w…
+ 8   166  1979 &lt;NA&gt;         16       0 Puffinus gravis Marine Global  Oceanic w…
+ 9   166  1979 &lt;NA&gt;          1       0 Puffinus gravis Marine Global  Oceanic w…
+10   166  1979 &lt;NA&gt;        150       0 Puffinus gravis Marine Global  Oceanic w…
+# ℹ 326,517 more rows
+# ℹ 6 more variables: PROTECTED_AREA &lt;lgl&gt;, BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;,
+#   ORGANISMS &lt;chr&gt;, CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;
+
+$Amphibians
+# A tibble: 2,446 × 15
+      id  year plot  abundance biomass sp                  REALM CLIMATE HABITAT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
+ 1   305  1980 &lt;NA&gt;         12       0 Desmognathus quadr… Terr… Temper… Appala…
+ 2   305  1981 &lt;NA&gt;          4       0 Desmognathus aeneus Terr… Temper… Appala…
+ 3   305  1981 &lt;NA&gt;         20       0 Desmognathus monti… Terr… Temper… Appala…
+ 4   305  1976 &lt;NA&gt;          8       0 Desmognathus aeneus Terr… Temper… Appala…
+ 5   305  1976 &lt;NA&gt;         27       0 Desmognathus monti… Terr… Temper… Appala…
+ 6   305  1976 &lt;NA&gt;         15       0 Desmognathus ochro… Terr… Temper… Appala…
+ 7   305  1976 &lt;NA&gt;          7       0 Desmognathus quadr… Terr… Temper… Appala…
+ 8   305  1977 &lt;NA&gt;          7       0 Desmognathus aeneus Terr… Temper… Appala…
+ 9   305  1977 &lt;NA&gt;         22       0 Desmognathus monti… Terr… Temper… Appala…
+10   305  1977 &lt;NA&gt;         18       0 Desmognathus ochro… Terr… Temper… Appala…
+# ℹ 2,436 more rows
+# ℹ 6 more variables: PROTECTED_AREA &lt;lgl&gt;, BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;,
+#   ORGANISMS &lt;chr&gt;, CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;
+
+$Benthos
+# A tibble: 1,711,785 × 15
+      id  year plot  abundance biomass sp                  REALM CLIMATE HABITAT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
+ 1    76  1992 &lt;NA&gt;          2       0 Aphroditoidea       Mari… Temper… Estuar…
+ 2    76  1992 &lt;NA&gt;          5       0 Ascidiella scabra   Mari… Temper… Estuar…
+ 3    76  1992 &lt;NA&gt;          4       0 Asterias rubens     Mari… Temper… Estuar…
+ 4    76  1992 &lt;NA&gt;          9       0 Calliostoma zyziph… Mari… Temper… Estuar…
+ 5    76  1992 &lt;NA&gt;         10       0 Crepidula fornicata Mari… Temper… Estuar…
+ 6    76  1992 &lt;NA&gt;          1       0 Gibbula tumida      Mari… Temper… Estuar…
+ 7    76  1992 &lt;NA&gt;          1       0 Hippolyte varians   Mari… Temper… Estuar…
+ 8    76  1992 &lt;NA&gt;          1       0 Hyas coarctatus     Mari… Temper… Estuar…
+ 9    76  1992 &lt;NA&gt;          1       0 Liocarcinus puber   Mari… Temper… Estuar…
+10    76  1992 &lt;NA&gt;          1       0 Liparis sp          Mari… Temper… Estuar…
+# ℹ 1,711,775 more rows
+# ℹ 6 more variables: PROTECTED_AREA &lt;lgl&gt;, BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;,
+#   ORGANISMS &lt;chr&gt;, CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;
+
+$Birds
+# A tibble: 1,487,942 × 15
+      id  year plot  abundance biomass sp                  REALM CLIMATE HABITAT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
+ 1    39  1976 &lt;NA&gt;        7.5      NA Catharus guttatus   Terr… Temper… Decidu…
+ 2    39  1976 &lt;NA&gt;        8        NA Catharus ustulatus  Terr… Temper… Decidu…
+ 3    39  1976 &lt;NA&gt;       12        NA Dendroica caerules… Terr… Temper… Decidu…
+ 4    39  1977 &lt;NA&gt;        2.5      NA Catharus fuscescens Terr… Temper… Decidu…
+ 5    39  1977 &lt;NA&gt;        5        NA Catharus guttatus   Terr… Temper… Decidu…
+ 6    39  1977 &lt;NA&gt;        7        NA Catharus ustulatus  Terr… Temper… Decidu…
+ 7    39  1977 &lt;NA&gt;       11        NA Dendroica caerules… Terr… Temper… Decidu…
+ 8    39  1977 &lt;NA&gt;        2        NA Dendroica fusca     Terr… Temper… Decidu…
+ 9    39  1977 &lt;NA&gt;       28        NA Empidonax minimus   Terr… Temper… Decidu…
+10    39  1977 &lt;NA&gt;        5        NA Hylocichla musteli… Terr… Temper… Decidu…
+# ℹ 1,487,932 more rows
+# ℹ 6 more variables: PROTECTED_AREA &lt;lgl&gt;, BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;,
+#   ORGANISMS &lt;chr&gt;, CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;
+
+$Fish
+# A tibble: 2,294,445 × 15
+      id  year plot  abundance biomass sp                  REALM CLIMATE HABITAT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
+ 1    45  2006 &lt;NA&gt;          1   4.80  Canthigaster solan… Mari… Tropic… Reef   
+ 2    45  2006 &lt;NA&gt;          2   0.630 Ctenogobiops feroc… Mari… Tropic… Reef   
+ 3    45  2006 &lt;NA&gt;          1  26.8   Echidna nebulosa    Mari… Tropic… Reef   
+ 4    45  2006 &lt;NA&gt;          1   1.87  Epinephelus merra   Mari… Tropic… Reef   
+ 5    45  2006 &lt;NA&gt;          1   8.31  Paracirrhites arca… Mari… Tropic… Reef   
+ 6    45  2006 &lt;NA&gt;          1   0.200 Pseudocheilinus he… Mari… Tropic… Reef   
+ 7    45  2006 &lt;NA&gt;         12  70.7   Stegastes nigricans Mari… Tropic… Reef   
+ 8    45  2006 &lt;NA&gt;          2  38.7   Acanthurus nigrofu… Mari… Tropic… Reef   
+ 9    45  2006 &lt;NA&gt;          1  46.2   Acanthurus trioste… Mari… Tropic… Reef   
+10    45  2006 &lt;NA&gt;          1  18.3   Anampses twistii    Mari… Tropic… Reef   
+# ℹ 2,294,435 more rows
+# ℹ 6 more variables: PROTECTED_AREA &lt;lgl&gt;, BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;,
+#   ORGANISMS &lt;chr&gt;, CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;
+
+$`Freshwater invertebrates`
+# A tibble: 93,966 × 15
+      id  year plot  abundance biomass sp                  REALM CLIMATE HABITAT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
+ 1   237  1984 &lt;NA&gt;       2000       0 Daphnia pulicaria   Fres… Temper… Temper…
+ 2   237  1983 &lt;NA&gt;      28000       0 Notholca acuminata  Fres… Temper… Temper…
+ 3   237  1984 &lt;NA&gt;       8000       0 Keratella quadrata  Fres… Temper… Temper…
+ 4   237  1984 &lt;NA&gt;      19000       0 Notholca            Fres… Temper… Temper…
+ 5   237  1984 &lt;NA&gt;      11000       0 Synchaeta           Fres… Temper… Temper…
+ 6   237  1984 &lt;NA&gt;     768000       0 Conochiloides nata… Fres… Temper… Temper…
+ 7   237  1984 &lt;NA&gt;     156000       0 Cyclopoida copepod… Fres… Temper… Temper…
+ 8   237  1984 &lt;NA&gt;      16000       0 Daphnia mendotae    Fres… Temper… Temper…
+ 9   237  1983 &lt;NA&gt;     194000       0 Copepod nauplii     Fres… Temper… Temper…
+10   237  1983 &lt;NA&gt;       9000       0 Polyarthra dolicho… Fres… Temper… Temper…
+# ℹ 93,956 more rows
+# ℹ 6 more variables: PROTECTED_AREA &lt;lgl&gt;, BIOME_MAP &lt;chr&gt;, TAXA &lt;chr&gt;,
+#   ORGANISMS &lt;chr&gt;, CENT_LAT &lt;dbl&gt;, CENT_LONG &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>To work with lists in <code>purrr</code> the <code>map</code> function will be our loyal servant, and they are many: i.e.&nbsp;<code>map</code>, <code>map2</code>, <code>map_dfr</code>, <code>map_dfc</code> etc.</p>
+<ul>
+<li><p><code>map</code> is used when we want to apply a function to each element of one list (it works like <code>lapply</code>)</p></li>
+<li><p><code>map2</code> is used when we want to apply a function to each element of two lists (it works like <code>mapply</code>)</p></li>
+<li><p><code>map_dfr</code> and <code>map_dfc</code> are used when we want to combine lists into data frames by rows or columns, respectively.</p></li>
+</ul>
+<p>I will use here <code>map</code> and <code>map2</code> (specially in data viz and statistical modelling post); if you want to know more, take a look at:</p>
+<p>https://dcl-prog.stanford.edu/purrr-basics.html</p>
+<p>and</p>
+<p>https://jennybc.github.io/purrr-tutorial/</p>
+<p>Let’s start with <code>map()</code>, filtering studies that have been sampled over more than 10 years.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>filter_year <span class="ot">&lt;-</span> split_taxa <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="sc">~</span> .x <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">mutate</span>(<span class="at">n_year=</span><span class="fu">n_distinct</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># here we create a column showing how many years we have for each taxa, grouped by study id </span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">filter</span>(n_year <span class="sc">&gt;</span> <span class="dv">10</span>)) <span class="co"># and filter only those studies with more than 10 years</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In case you are not used to tidyverse, <code>map()</code> works like <code>lapply()</code> in base R. Tilda(<code>~</code>) represents <code>function(x)</code> and <code>(.)</code> would be <code>(x)</code>. Just to show it, in a very non-sense way, let’s sum up the overall number of individuals of each taxa. To make it simple (and even poorer), let’s select only the abundance column first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>select_abundance <span class="ot">&lt;-</span> filter_year <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> .x <span class="sc">%&gt;%</span> ungroup <span class="sc">%&gt;%</span> <span class="fu">select</span>(abundance))</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(select_abundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$All
+# A tibble: 313,561 × 1
+   abundance
+       &lt;dbl&gt;
+ 1         5
+ 2         2
+ 3        15
+ 4        23
+ 5        20
+ 6        20
+ 7        60
+ 8        16
+ 9         1
+10       150
+# ℹ 313,551 more rows
+
+$Amphibians
+# A tibble: 327 × 1
+   abundance
+       &lt;dbl&gt;
+ 1        12
+ 2         4
+ 3        20
+ 4         8
+ 5        27
+ 6        15
+ 7         7
+ 8         7
+ 9        22
+10        18
+# ℹ 317 more rows
+
+$Benthos
+# A tibble: 1,594,662 × 1
+   abundance
+       &lt;dbl&gt;
+ 1        18
+ 2        36
+ 3         2
+ 4      1038
+ 5       158
+ 6       130
+ 7        48
+ 8        36
+ 9        30
+10         6
+# ℹ 1,594,652 more rows
+
+$Birds
+# A tibble: 1,288,906 × 1
+   abundance
+       &lt;dbl&gt;
+ 1       7.5
+ 2       8  
+ 3      12  
+ 4       2.5
+ 5       5  
+ 6       7  
+ 7      11  
+ 8       2  
+ 9      28  
+10       5  
+# ℹ 1,288,896 more rows
+
+$Fish
+# A tibble: 2,026,702 × 1
+   abundance
+       &lt;dbl&gt;
+ 1         7
+ 2         5
+ 3         2
+ 4         1
+ 5         1
+ 6         6
+ 7         6
+ 8        52
+ 9        16
+10         1
+# ℹ 2,026,692 more rows
+
+$`Freshwater invertebrates`
+# A tibble: 91,528 × 1
+   abundance
+       &lt;dbl&gt;
+ 1      2000
+ 2     28000
+ 3      8000
+ 4     19000
+ 5     11000
+ 6    768000
+ 7    156000
+ 8     16000
+ 9    194000
+10      9000
+# ℹ 91,518 more rows</code></pre>
+</div>
+</div>
+<p>Using the base R approach, to sum up a column over lists, we would use something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(select_abundance, <span class="cf">function</span>(x) { <span class="fu">colSums</span> (x)} )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$All
+abundance 
+ 10525821 
+
+$Amphibians
+abundance 
+   115344 
+
+$Benthos
+  abundance 
+23503327052 
+
+$Birds
+abundance 
+ 14673312 
+
+$Fish
+abundance 
+ 52881387 
+
+$`Freshwater invertebrates`
+ abundance 
+2898542291 
+
+$`Freshwater plants`
+abundance 
+       NA 
+
+$Mammals
+abundance 
+ 679713.1 
+
+$`Marine invertebrates`
+abundance 
+256799039 
+
+$`Marine plants`
+  abundance 
+25161115487 
+
+$Reptiles
+abundance 
+    23555 
+
+$`Terrestrial invertebrates`
+abundance 
+  1022759 
+
+$`Terrestrial plants`
+abundance 
+  2427471 </code></pre>
+</div>
+</div>
+<p>With <code>purrr</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>select_abundance <span class="sc">%&gt;%</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> .x <span class="sc">%&gt;%</span>  </span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">summarise</span>(<span class="at">row_sums =</span> <span class="fu">colSums</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>select_abundance <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">summarise</span>(., <span class="at">row_sums =</span> <span class="fu">colSums</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$All
+# A tibble: 1 × 1
+  row_sums
+     &lt;dbl&gt;
+1 10525821
+
+$Amphibians
+# A tibble: 1 × 1
+  row_sums
+     &lt;dbl&gt;
+1   115344
+
+$Benthos
+# A tibble: 1 × 1
+      row_sums
+         &lt;dbl&gt;
+1 23503327052.
+
+$Birds
+# A tibble: 1 × 1
+   row_sums
+      &lt;dbl&gt;
+1 14673312.
+
+$Fish
+# A tibble: 1 × 1
+   row_sums
+      &lt;dbl&gt;
+1 52881387.
+
+$`Freshwater invertebrates`
+# A tibble: 1 × 1
+     row_sums
+        &lt;dbl&gt;
+1 2898542291.
+
+$`Freshwater plants`
+# A tibble: 1 × 1
+  row_sums
+     &lt;dbl&gt;
+1       NA
+
+$Mammals
+# A tibble: 1 × 1
+  row_sums
+     &lt;dbl&gt;
+1  679713.
+
+$`Marine invertebrates`
+# A tibble: 1 × 1
+    row_sums
+       &lt;dbl&gt;
+1 256799039.
+
+$`Marine plants`
+# A tibble: 1 × 1
+      row_sums
+         &lt;dbl&gt;
+1 25161115487.
+
+$Reptiles
+# A tibble: 1 × 1
+  row_sums
+     &lt;dbl&gt;
+1    23555
+
+$`Terrestrial invertebrates`
+# A tibble: 1 × 1
+  row_sums
+     &lt;dbl&gt;
+1  1022759
+
+$`Terrestrial plants`
+# A tibble: 1 × 1
+  row_sums
+     &lt;dbl&gt;
+1 2427471.</code></pre>
+</div>
+</div>
+<p>We filtered our data by <code>n_years &gt; 10</code>, let’s increase this number selecting only studies with more that 30 years of sampling.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>bio_list <span class="ot">&lt;-</span> split_taxa <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="sc">~</span> .x <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">nyear =</span> <span class="fu">n_distinct</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">filter</span>(nyear <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(id<span class="sc">:</span>sp,<span class="sc">-</span>nyear))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have some elements in our list with 0, meaning that there is no study with more than 30 years for that specific taxa. We can use either <code>discard()</code> or <code>keep()</code> to exclude or keep elements in our list, respectively. Let’s exclude those elements without any data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>discard_elements <span class="ot">&lt;-</span> bio_list <span class="sc">%&gt;%</span> <span class="fu">discard</span>(., <span class="sc">~</span><span class="fu">nrow</span>(.) <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, instead of 13 taxa we have seven.</p>
+<p>If you want to exclude elements in a list by name, we can use <code>list_modify("listElementName" = zap())</code>. Note that, previously, we could use <code>list_modify = "NULL"</code>, but this option is now deprecated. For example, let’s exclude “Benthos” from our object</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>no_benthos <span class="ot">&lt;-</span> discard_elements <span class="sc">%&gt;%</span> </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_modify</span>(<span class="st">"Benthos"</span> <span class="ot">=</span> <span class="fu">zap</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s create a more complex object now. As we have both abundance and biomass column, let’s create a new column representing presence/absence (pres_ab). First, though, we have to deal with the NA’s in our data. We can use <code>replace_na()</code> for that.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>presence_abs <span class="ot">&lt;-</span> no_benthos <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> .x <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">i =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">abundance =</span> <span class="dv">0</span>, <span class="at">biomass =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">pres_ab =</span> abundance<span class="sc">+</span>biomass,</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pres_ab =</span> <span class="fu">case_when</span>(pres_ab <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>                                   T <span class="sc">~</span> <span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here I introduced a new (very useful) function <code>case_when()</code>. In the current example, I created the <em>“pres_ab”</em> column and asked the function to assign 1 (presence) case when the sum of abundance+biomass is higher than 0 and assign 0 when the opposite is true (<code>T ~ 0</code>) . You can use <code>case_when()</code> in many different ways, being very useful when we have to create new columns based on other columns or change values within columns.</p>
+<p>As in the long format we don’t have species assigned with 0 either in abundance or biomass, <em>“pres_ab”</em> column will be always 1 (my bad haha). Let’s transform the data into the wide format to get presences and absences indeed. If we were not working with lists, we should transform each taxa separately. We can now combine <code>purrr</code> with <code>pivot_wider()</code> and transform all elements of our list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>wide_list <span class="ot">&lt;-</span> presence_abs <span class="sc">%&gt;%</span> </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> .x <span class="sc">%&gt;%</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(id,year,sp) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">-</span>plot,<span class="sc">-</span>abundance, <span class="sc">-</span>biomass) <span class="sc">%&gt;%</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">pres_ab =</span> <span class="fu">sum</span>(pres_ab)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">pres_ab =</span> <span class="fu">case_when</span>(pres_ab <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>                                   T <span class="sc">~</span> <span class="dv">0</span>))<span class="sc">%&gt;%</span> </span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>        ungroup <span class="sc">%&gt;%</span> </span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">arrange</span>(sp) <span class="sc">%&gt;%</span> <span class="co"># sp names in alphabetic order</span></span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"sp"</span>, <span class="at">values_from =</span> <span class="st">"pres_ab"</span>, </span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_fill =</span> <span class="fu">list</span>(<span class="at">pres_ab=</span><span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have 0’s and 1’s. As we have species presences absences per year, we can check species gains and losses. For that we transform our data back into the long format (now with 0’s and 1’s) and use <code>case_when()</code> again to create the new column</p>
+<p>As we are working with temporal data, we can use <code>case_when()</code> combined with <code>lag()</code> or <code>lead()</code> to analyse either the previous or next row in our data set, respectively. For example, let’s create a new column to check species gains and losses per year.</p>
+<p>Now I will transform the lists into the long format again and check species gains and losses using <code>case_when()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>long_list <span class="ot">&lt;-</span>wide_list <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(id,year),<span class="at">names_to =</span> <span class="st">"sp"</span>, <span class="at">values_to =</span> <span class="st">"pres_ab"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can check how each species is changing over time</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>gain_loss <span class="ot">&lt;-</span> long_list <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(id,sp) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">arrange</span>(year, <span class="at">.by_group =</span> <span class="cn">TRUE</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">gain_loss =</span> <span class="fu">case_when</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"NA"</span>,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">lag</span>(pres_ab <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">&amp;</span> pres_ab <span class="sc">==</span> <span class="dv">1</span>  <span class="sc">~</span> <span class="st">"gain"</span>, </span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">lag</span>(pres_ab <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">&amp;</span> pres_ab <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"loss"</span>,</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">lag</span>(pres_ab <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">&amp;</span> pres_ab <span class="sc">==</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"persist_ab"</span>,</span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>                         T <span class="sc">~</span> <span class="st">"persist_pres"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here I first grouped the data by study id and species, then I ordered the year, separately, by group. With <code>mutate()</code>, I created the column gain_loss, putting NA to the first year of each study, since we cant have gains or losses at the first year. Further, I assigned <em>gain</em> when the species was absent at the previous year (<code>lag(pres_ab==0)</code>) and present in the next one (<code>pres_ab==1</code>) and the opposite to <em>loss</em>. Also, if the species persisted absent or present, but we could also use “NA” if the idea is to check only gains and losses.</p>
+<p>Another nice trick, when dealing with lists, is that sometimes we need to use the name of the elements in a list as a column. For example, here the name of the elements in our list is the taxa’s name. We can use <code>imap</code> and <code>mutate</code> to create a new column based on these names. With <code>mutate</code> (in <code>dplyr 1.0.0</code>) we can also select the position of the new column with <code>.before</code> and <code>.after</code>, otherwise the new column will be the last one.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>taxa_list <span class="ot">&lt;-</span> gain_loss <span class="sc">%&gt;%</span> <span class="fu">imap</span>(., <span class="sc">~</span><span class="fu">mutate</span>(.x, <span class="at">TAXA =</span> .y, <span class="at">.after =</span> year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="some-other-tricks-with-purrr" class="level1">
+<h1>Some other tricks with <code>purrr</code></h1>
+<p>Sometimes, we have to deal with nested lists. I will not focus on nested lists here, but just out of curiosity, let’s split our list once more, now based on the different studies we have. So we will have lists based on taxa and nested based on studies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>nest_list <span class="ot">&lt;-</span> wide_list <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">split</span>(.,.<span class="sc">$</span>id))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Usually, when I have such kind of data, I use nested <code>maps</code> - not sure if this is the most elegant approach though. For example, let’s say we want to check the species richness for each taxa in each study based on years of sampling. I’d do something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>double_map <span class="ot">&lt;-</span> nest_list <span class="sc">%&gt;%</span> <span class="fu">map</span>(map, <span class="sc">~</span><span class="fu">mutate</span>(.,<span class="at">richness =</span> <span class="fu">rowSums</span>(.[<span class="sc">-</span><span class="dv">1</span><span class="sc">:-</span><span class="dv">2</span>]), <span class="at">.after =</span> year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To work with two lists, we can use <code>map2()</code> . A simple example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>list1<span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">c</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span> ,<span class="at">c =</span> <span class="dv">3</span>))</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>list2<span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">c</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span> ,<span class="at">c =</span> <span class="dv">3</span>))</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="fu">map2</span>(list1, list2, sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$a
+[1] 2
+
+$b
+[1] 4
+
+$c
+[1] 6</code></pre>
+</div>
+</div>
+<p>I will use more <code>map2()</code> in the following posts, but this is particular interesting for those working with functional diversity of multiple taxa. You can do the same we did here (split the data by taxa), in both community and trait data, and then use <code>map2()</code> to calculate functional diversity. It will not work here of course, but something like this might work for you:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FD)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">map2</span>(list_trait, list_comm, dbFD) <span class="co"># list with traits, list with communities and the function you want to apply (in this case, dbFD)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and then you can get the CWM, Rao or whatever metric you want from the <code>dbFD()</code> function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>list_CWM <span class="ot">&lt;-</span> t1 <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="st">"CWM"</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>list_RaoQ <span class="ot">&lt;-</span> t1 <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="st">"RaoQ"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> .x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Another important trick we can do with <code>purrr</code> is to load multiple data into R. Sometimes we download ecological data and the <code>.csv</code> files come separated into multiple zip files. If you have faced that, and had to extract each file one by one, guess what? You can run them all at once with <code>purrr</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>manyfiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">"data"</span>), <span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">vroom</span>(.)) <span class="co">#here("data"), as I explained at the beginning of this post, is where your files are located in your Rproject</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In summary, <code>tidyverse</code> has many functions that can boost our data analysis and how / when to use them will depend on your data and what you want to get from it. I hope to have kicked off some new useful functions and tricks.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

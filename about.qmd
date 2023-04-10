@@ -1,0 +1,25 @@
+---
+title: ""
+image: profile.jpg
+about:
+  template: trestles
+  links:
+        - text: ResearchGate
+          href: https://www.researchgate.net/profile/Diego-Trindade
+        - text: Github
+          href: https://github.com/diegotrindade
+        - text: Email
+          href: mailto:dpftrindade@gmail.com
+---
+
+I'm a PhD candidate at the University of Tartu, Estonia. My PhD studies focus on understanding how global changes affect species gains and losses (biodiversity change) across space and time. In order to understand those changes, in a spatiotemporal context, I'm assessing how both observed and dark diversity dynamics are changing over time (the latter defined as "currently absent species that could potentially inhabit a study site"). With dark diversity, it is possible to decompose species gains and losses into two space‐related components: one associated with local dynamics (species moving from observed to dark diversity and vice versa) and another related to gains and losses of site‐specific species pool (species moving to and from the pool after regional immigration, regional extinction or change in local ecological conditions). This decomposition might improve the way we detect biodiversity change and disequilibrium dynamics (e.g. extinction debt and colonization credit). To apply and test those ideas I'm using mechanistic models, multi-taxa and long-term databases (plants, birds, lichens, pollen etc.).
+
+
+## Education
+
+University of Tartu | Estonia
+PhD student | Sept 2017 - Current
+
+Universidade Federal de Pernambuco | Brazil
+Masters in Plant Ecology | 2015 - 2017
+

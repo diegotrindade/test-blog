@@ -1,0 +1,37 @@
+---
+
+title: "Temporal lags in observed and dark diversity in the Anthropocene"
+author: ["DPF Trindade", "CP Carmona", "M Pärtel"]
+date: '2020-04-15'
+slug: dark-div-change
+html:
+    fig-width: 8
+    fig-height: 8
+categories: [publication]
+image:
+  "featured.png"
+  
+---
+
+
+title: "Temporal lags in observed and dark diversity in the Anthropocene" ["DPF Trindade", "CP Carmona", "M Pärtel"]
+
+date: "2020-04-15T00:00:00Z" doi: "10.1111/gcb.15093"a
+
+publication: "*Global Change Biology*" publication_short: ""
+
+# Abstract
+
+Understanding biodiversity changes in the Anthropocene (e.g. due to climate and land‐use change) is an urgent ecological issue. This important task is challenging because global change effects and species responses are dependent on the spatial scales considered. Furthermore, responses are often not immediate. However, both scale and time delay issues can be tackled when, at each study site, we consider dynamics in both observed and dark diversity. Dark diversity includes those species in the region that can potentially establish and thrive in the local sites' conditions but are currently locally absent. Effectively, dark diversity connects biodiversity at the study site to the regional scales and defines the site‐specific species pool (observed and dark diversity together). With dark diversity, it is possible to decompose species gains and losses into two space‐related components: one associated with local dynamics (species moving from observed to dark diversity and vice versa) and another related to gains and losses of site‐specific species pool (species moving to and from the pool after regional immigration, regional extinction or change in local ecological conditions). Extinction debt and immigration credit are useful to understand dynamics in observed diversity, but delays might happen in species pool changes as well. In this opinion piece we suggest that considering both observed and dark diversity and their temporal dynamics provides a deeper understanding of biodiversity changes. Considering both observed and dark diversity creates opportunities to improve conservation by allowing to identify species that are likely to go regionally extinct as well as foreseeing which of the species that newly arrive to the region are more likely to colonize local sites. Finally, by considering temporal lags and species gains and losses in observed and dark diversity, we combine phenomena at both spatial and temporal scales, providing a novel tool to examine biodiversity change in the Anthropocene.
+
+
+tags: - Global change - Biodiversity Change - Dark diversity - Species pool - Time delay
+
+# links:
+
+# - name: ""
+
+# url:
+
+url_pdf: https://www.researchgate.net/publication/340613005_Temporal_lags_in_observed_and_dark_diversity_in_the_Anthropocene url_code: '' url_dataset: '' url_poster: '' url_project: '' url_slides: '' url_source: '' url_video: ''
+

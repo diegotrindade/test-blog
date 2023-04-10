@@ -1,0 +1,674 @@
+---
+title: "#1 Data wrangling in ecology with `tidyverse`"
+author: Diego P.F. Trindade
+date: '2020-07-15'
+slug: data-wrangling-in-ecology
+html:
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: true
+  warning: false
+  message: false
+categories: []
+tags:
+  - bigdata
+  - ecology
+  - tidyverse
+  - data wrangling
+image: "featured.png"
+---
+
+![Image credit: Alisson Horst](featured.png)
+
+```{r eval = F}
+#install.packages(c("here", "dplyr", "vroom", "tidyr", "purrr"))
+library(here)
+library(dplyr)
+library(vroom)
+library(tidyr)
+library(purrr)
+
+
+```
+
+```{r include=FALSE}
+library(here)
+library(dplyr)
+library(vroom)
+library(tidyr)
+library(purrr)
+library(tidyverse)
+
+```
+
+The amount of data becoming available in ecology has been increasing rather fast in the recent years. Therefore, being able to wrangling, analyzing and visualizing this data, associated with a good scientific question, is timely for ecologists. Here, I will introduce some `tidyverse` packages and functions that can make this part of the job a bit easier.
+
+Most information I will present here was gotten from our outstanding R community ([StackOverflow](https://stackoverflow.com), [GitHub](https://github.com), [Twitter posts - #rstats -](https://twitter.com/search?q=%23rstats&src=typed_query&f=live) and R books), based on daily issues faced during my PhD. Also, everything here can be achieved by using base R. However, some `tidyverse` packages can be helpful to avoid unnecessary loops and functions, saving some lines of code and time. The intention of this post is, therefore, to show some useful functions that can facilitate our life but also to gather information in one place for my own purpose :).
+
+In this post, I will be using the **BioTime** database as an example, which is a biodiversity time series data with multiple taxa and several sites around the world (more details at: http://biotime.st-andrews.ac.uk/). I anticipate that this is not an extensive analysis of the data but just an example of how we can use some `tidyverse` packages and functions to any data we want. **Please download both data and metadata, in case you want to follow this post.**
+
+This post is split into three parts:
+
+-   1st: Presenting `here`, `archive` and `vroom` packages and how to wrangling/exploring data with `dplyr` and `purrr`
+
+-   2nd: Data visualization with `ggplot2` and `cowplot`
+
+-   3rd: Statistical modelling and bootstraps with `tidymodels::broom`
+
+# `here` package
+
+For those using R projects, `here` is quite handy. With `here` we don't need to set our working directory `(setwd)` anymore. This is particularly interesting whether we are collaborating and have to share our scripts and data with colleagues or need to read files saved at different folders and work on different computers. When using `here` we only need to set the path where the files are saved within the R project:
+
+For example, let's say the project is in **"MyFolder"** and the data in **"data"**. Using the traditional way, before starting working on the data, we would have to set up the working directory:
+
+```{r eval=FALSE}
+setwd("C:\Users\yourname\Desktop\MyFolder\data")
+
+myfile <- read.csv("myfile.csv")
+```
+
+With `here`, instead of setting the working directory `(setwd)` and read the file afterwards (`read.csv`), we can go straight to the file part.
+
+For instance, the project is in **"MyFolder"** and we saved your file in **"data"**. You can simply read your file as:
+
+```{r eval=FALSE}
+
+myfile <- read.csv(here("data", "myfile.csv"), header=T, sep=";")
+
+or
+
+myfile <- read.csv(here("data\myfile.csv", header=T, sep=";"))
+```
+
+If you have a file in a folder within the "data" folder you just need to add this new "path":
+
+```{r eval=FALSE}
+myfile2 <- read.csv(here("data", "differentfolder", 
+                         "mysecondfile.csv"), header=T, sep=";")
+```
+
+You can use this for everything you want and it helps to keep files organized within your project. For instance, to save figures, you simply create a new folder to store figures and change the path (i.e. "data" by "figures"):
+
+```{r eval=FALSE}
+
+ggsave(here("figures", file = "fig1.png"), fig_object)
+
+```
+
+# File size
+
+Specially if you are storing your projects on GitHub, large files can be annoying, since GitHub allows us to store files up to 100 mb. To tackle this issue, we can either use the lfs storage method (more details at: https://git-lfs.github.com) or compress the data as `.zip` or `.gz` files. Sometimes, though, the file is too large that even after compressing it, you still need to use the lsf method to push it to GitHub - which is the biotime case. Anyway, it is good to know how to compress your files in case you need it for a different data.
+
+There are different ways to do that in R. I'm going to use here the `archive` package. This package is a good alternative for both compressing and reading data.
+
+As the biotime file is already zipped, let's use the metadata as an example.
+
+First we read the file
+
+```{r eval = F}
+
+metadata <- read.csv(here("posts", 
+                          "biotime_meta.csv"), header=T, sep=",") 
+```
+
+-   Note that I'm using the path where my project is saved at.
+
+To compress this file you have to use the `archive_write` function:
+
+```{r eval = F}
+#renv::install("archive")
+library(archive)
+write_csv(metadata, archive_write("metadata.zip", "metadata.csv"))
+```
+
+I saved the file as *.zip*, but you can use *.gz* or other formats. More information at: https://github.com/jimhester/archive
+
+The biotime file is already compressed (134 mb). If you extract the .csv, the size will increase to more than 1gb. Working with compressed files can save a lot of time and space when pushing it to GitHub, as I said before.
+
+# `vroom`
+
+If you don't want to extract the .csv file but read it in the compressed format (e.g. *.zip*, *.gz* etc), there are different ways to do so. I'm going to use the `vroom` package to do the job (faster) - other options would be `readr` package or `fread()` function in `data.table` package.
+
+For reading the .zip file we simply change from `read.csv`(base R) to `vroom`.
+
+```{r}
+
+#devtools::install_dev("vroom")
+library(vroom)
+
+biotime_df <- vroom(here("posts", 
+                         "biotime.zip"), delim = ",")
+
+biotime_metadata <- vroom(here("posts", 
+                               "biotime_meta.csv"), delim = ",")
+
+
+```
+
+# Cleaning and exploring BioTime with `dplyr`
+
+`dplyr` is a very useful package to clean and explore data in R. I'm not going to spend much time talking about this package because there are many other great material available out there. Rather, I will just show some important functions, specially for beginner users. You can check a detailed information about this package at: https://dplyr.tidyverse.org
+
+With `dplyr` we can select and rename columns, filter lines, create new variables and make plenty of cool/complex stuff. Throughout this post, I'm going to use mostly `select`, `filter`, `group_by` and `mutate/summarize`.
+
+Let's start by cleaning both data and metadata using some `dplyr` functions. There are many columns in both files and I'm going to select only those I'm interested in. For that, we can use `select`:
+
+```{r}
+
+biotime <- biotime_df %>% 
+  select(id = STUDY_ID, year = YEAR, plot = PLOT, 
+         abundance = sum.allrawdata.ABUNDANCE, 
+         biomass = sum.allrawdata.BIOMASS, sp = GENUS_SPECIES)
+
+
+metadata <- biotime_metadata %>% 
+  select(STUDY_ID:ORGANISMS, CENT_LAT, CENT_LONG) %>% 
+  rename(id = STUDY_ID)
+
+
+
+```
+
+If you are not used to dplyr, this `%>%` is called *pipe*, and we can use it to nest our functions. We first select the object we want, then use the `%>%` to nest more functions, separating each one by a new pipe, like I did to create the `metadata` object.
+
+Now, in biotime object, we have species' name, abundance, plot, year and site.
+
+```{r}
+
+head(biotime)
+
+```
+
+Whereas in metadata we have realm, taxa, habitat, whether the area is protected or not etc.
+
+```{r}
+
+head(biotime_metadata)
+
+```
+
+-   Note that, in biotime object, I took the opportunity and renamed the columns within `select`. You can also use `rename` if you want (as I did in metadata object). Also, if you have to rename/fix several column names, you can use the [`janitor`](https://github.com/sfirke/janitor) package.
+
+We use `select` for columns and `filter` for rows. Let´s say we are interested only in *Terrestrial plants* from the metadata. We can go for:
+
+```{r}
+
+metadata %>% 
+filter(TAXA == "Terrestrial plants") %>% 
+head()
+
+```
+
+Of course we can add more arguments to the `filter`, for example, only terrestrial plants in tropical climate and so on.
+
+```{r}
+
+metadata %>% 
+filter(TAXA == "Terrestrial plants",
+       CLIMATE == "Tropical") %>% 
+head()
+```
+
+We can also do the opposite (filter rows out), adding `!` to the column's name:
+
+```{r}
+
+metadata %>% 
+filter(!TAXA == "Terrestrial plants",
+       !CLIMATE == "Tropical") %>% 
+head()
+```
+
+We can filter values higher or lower than:
+
+```{r}
+metadata %>% 
+filter(id > 100) %>% 
+head()
+```
+
+Sometimes we need to filter several specific rows. For that, we use `%in%`.
+
+```{r}
+
+metadata %>% 
+filter(TAXA %in% c("Terrestrial plants",
+                   "Birds",
+                   "Fish")) %>% 
+head()
+```
+
+Besides selecting columns and filtering rows we can also create new columns with `mutate`. Let's filter only the study number 10 and create a new column to check how many species and years they have sampled in this study. We can use `mutate` and `n_distinct()` to achieve that.
+
+```{r}
+
+biotime %>% 
+  filter(id == 10) %>%
+  mutate(total_sp = n_distinct(sp),
+         total_y = n_distinct(year))
+  
+
+```
+
+In this study we have 25 species and three different years.
+
+Now let's say we want to know how many species we have per year. To get that, we can use the function `group_by`.
+
+```{r}
+
+
+biotime %>% 
+  filter(id == 10) %>%
+  group_by(year) %>% 
+  mutate(total_sp = n_distinct(sp))
+
+
+
+```
+
+We can see that we have 22 species in 1984, 20 species in 1992, we can't see the third year though. That's because `mutate` creates a new column and repeats the values for each row we have. To get a summarized overview, we can use `summarise` instead.
+
+```{r}
+
+
+biotime %>% 
+  filter(id == 10) %>%
+  group_by(year) %>% 
+  summarise(total_sp = n_distinct(sp))
+
+
+```
+
+Now we can see the number of species per year, but the other columns were deleted. Therefore, both mutate and summaries give us the same result but in different ways, you have to choose which one fits better your purpose when dealing with the data.
+
+We can also combine `summarise` and `mutate` to get, for example, the frequency of species
+
+```{r}
+
+biotime %>%
+  filter(id == 10) %>%
+  group_by(sp) %>% 
+  summarise (total = n()) %>%
+  mutate(freq = total / sum(total))
+```
+
+Note that I've grouped by "species". We could also check the frequency of each species per year, adding the variable "year" in `group_by()`.
+
+```{r}
+
+biotime %>% 
+  filter(id == 10) %>%
+  group_by(sp,year) %>% 
+  summarise (total = n()) %>%
+  mutate(freq = total / sum(total))
+```
+
+# `tidyr` - the art of pivoting data
+
+As ecologists, we have to deal with data frames either in long or wide formats all the time. Knowing how to transform the data into both formats, in R, is very handy and safe, because we don't need to create several .csv files, maintaining the original data intact, decreasing the chances of messing up it.
+
+The most important functions to transform data frames in `tidy` are `pivot_longer()` and `pivot_wider()`. These functions have been improved constantly. Out there, you will find `reshape2` package, `melt`, `spread` and `gather`. Those are the old school functions to transform data frames. I'm slowly moving from `spread`/`gather` into `pivot_wider()`/`pivot_longer()`. Then, let's try to transform our data into both wide and long formats using the new functions.
+
+Let's use the same example (study id 10) to transform the data into the wide format. We use `pivot_wider()`, specifying that the species names present in "sp" column will be the columns of the new object (`names_from = "sp"`) and the values present in "abundance" will be the row values (`values_from = "abundance"`).
+
+```{r echo=TRUE}
+
+biotime %>% 
+  filter(id == 10) %>%
+  pivot_wider(names_from = "sp", values_from = "abundance")
+
+```
+
+Oops.. something went wrong. It transformed our data frame but in an odd way. The warning says that our data is not uniquely identified, meaning that the function can't recognize each row, separately, in our data frame. To tackle this issue, we can simply bring the row names to a column, identifying each row, with the function `rownames_to_column()`. Let´s try again.
+
+```{r}
+
+biotime %>% 
+  filter(id == 10) %>%
+  rownames_to_column() %>% 
+  pivot_wider(names_from = "sp", values_from = "abundance")
+
+```
+
+Ok. It seems we are getting closer. Now we have the study 10 data frame in the wide format but when the species is absent we have NA's. To tackle this, we add the argument `values_fill` to our `pivot_wider()` function.
+
+```{r}
+
+biotime %>% 
+  filter(id == 10) %>%
+  rownames_to_column() %>% 
+  pivot_wider(names_from = "sp", values_from = "abundance", 
+              values_fill = list(abundance=0))
+
+```
+
+Now we have the data transformed into the wide format, with 0's instead of NA's. Note that, sometimes, the row names are names instead of numbers (i.e. sometimes we use species names as row names). If you face that, you can create a new column, labeling the rows, using `mutate()` and `row_number()` instead of `rownames_to_column()`. For example:
+
+```{r}
+
+biotime_wider <- biotime %>% 
+  filter(id == 10) %>%
+  #rownames_to_column() %>% 
+  mutate(id_rows = row_number()) %>% 
+  pivot_wider(names_from = "sp", values_from = "abundance", values_fill = list(abundance=0))
+
+```
+
+Now let´s transform our data into the other way round, from wide into long format. For that, we can use the function `pivot_longer()`
+
+```{r error=T}
+
+biotime_wider %>% 
+  pivot_longer(names_to = "sp", values_to = "abundance")
+
+```
+
+Error. When pivoting longer, we have to pay attention to the other columns we may have. In the `biotime_wider` object we have `id`, `year`, `plot`, `biomass`, `id_rows` and `species names`. We want to transform only `species names` and `values` (abundance) though. In this case, we have to omit the other columns we don't want to transform.
+
+```{r}
+
+biotime_wider %>% 
+  pivot_longer(-c(id:id_rows),names_to = "sp", values_to = "abundance")
+
+```
+
+With `pivot_longer()` and `pivot_wider()` you can make a lot of more complex transformations, I'm not going to cover those here though, please check them out at: https://tidyr.tidyverse.org/reference/pivot_wider.html
+
+# Merging data and working within lists with `purrr`
+
+Now let´s try to use this knowledge to create more complex objects, using new features, combining functions etc.
+
+When analyzing ecological data, most of the time, both data and metadata are useful, like in `BioTime` example.
+
+Let's check both data frames
+
+*BioTime data*
+
+```{r}
+head(biotime)
+```
+
+*Metadata*
+
+```{r}
+head(metadata)
+```
+
+As you can see, in *biotime* we have `id`, `year`, `plot`, `abundance`, `biomass` and `species`, whereas in *metadata* we have `id`, `realm`, `habitat` etc. So, let's say we are interested in examining terrestrial plants species from tropical forests, but as species are in one data frame and biomes in the other, we first have to merge both data frames. For merging data frames into one we can use either `bind_cols() / bind_rows()` functions, for binding columns and rows, respectively, or the `join family` available in `dplyr` (https://dplyr.tidyverse.org/reference/join.html). Here, we can use the `letf_join()` option to merge both data and metadata.
+
+```{r}
+
+merge_df <- left_join(biotime, metadata, by = "id")
+head(merge_df)
+
+```
+
+`left_join()` merged the data frames based on the study id. This is a safe way to merge data frames because the function will match exactly the same rows present in each data frame based on the argument you give in `"by = ..."`; in this case I chose `by = "id"`, but depending on your data you can add more variables.
+
+Now we have both data and metadata merged. Then, we can finally check terrestrial plant species from tropical forests.
+
+```{r}
+
+merge_df %>% 
+  filter(TAXA == "Terrestrial plants",
+       CLIMATE == "Tropical") %>% 
+head()
+
+```
+
+or Birds etc
+
+```{r}
+
+merge_df %>% 
+filter(TAXA == "Birds",
+       CLIMATE == "Tropical") %>% 
+  head()
+
+```
+
+Although those functions are useful to explore big data sets, most of the time, specially when working with multiple variables, filtering each one and examining them separately can be time consuming. For example, let's say we want to transform our current data frame (merge_df) from long into wide format, as we did before. The first time we transformed our data, we had a single study (id=10) and taxa. Now we have multiple studies and taxa. If we try `pivot_wider()`, plant and bird species names, for example, will be assigned as columns, making things difficult to disentangle afterwards. An useful way to avoid this is to split our data frame into lists based on each taxa we have. Then, we can apply the function we want for all elements of that list at once. We can do that using the package `purrr`, which has plenty of functions that make ecologists\` life a bit easier in that sense. Let's try to understand how this package works.
+
+First, let's create different lists based on different taxa with the `split()` function:
+
+```{r}
+
+split_taxa <- merge_df %>% 
+             split(.$TAXA)
+
+head(split_taxa)
+```
+
+To work with lists in `purrr` the `map` function will be our loyal servant, and they are many: i.e. `map`, `map2`, `map_dfr`, `map_dfc` etc.
+
+-   `map` is used when we want to apply a function to each element of one list (it works like `lapply`)
+
+-   `map2` is used when we want to apply a function to each element of two lists (it works like `mapply`)
+
+-   `map_dfr` and `map_dfc` are used when we want to combine lists into data frames by rows or columns, respectively.
+
+I will use here `map` and `map2` (specially in data viz and statistical modelling post); if you want to know more, take a look at:
+
+https://dcl-prog.stanford.edu/purrr-basics.html
+
+and
+
+https://jennybc.github.io/purrr-tutorial/
+
+Let's start with `map()`, filtering studies that have been sampled over more than 10 years.
+
+```{r}
+
+filter_year <- split_taxa %>% map(~ .x %>%
+                                  group_by(id) %>% 
+                                  mutate(n_year=n_distinct(year)) %>% # here we create a column showing how many years we have for each taxa, grouped by study id 
+                                  filter(n_year > 10)) # and filter only those studies with more than 10 years
+```
+
+In case you are not used to tidyverse, `map()` works like `lapply()` in base R. Tilda(`~`) represents `function(x)` and `(.)` would be `(x)`. Just to show it, in a very non-sense way, let's sum up the overall number of individuals of each taxa. To make it simple (and even poorer), let's select only the abundance column first.
+
+```{r}
+
+select_abundance <- filter_year %>% 
+  map(~ .x %>% ungroup %>% select(abundance))
+
+head(select_abundance)
+```
+
+Using the base R approach, to sum up a column over lists, we would use something like this:
+
+```{r}
+
+lapply(select_abundance, function(x) { colSums (x)} )
+
+```
+
+With `purrr`:
+
+```{r eval = F}
+
+select_abundance %>% 
+  map(~ .x %>%  
+       summarise(row_sums = colSums(.)))
+
+```
+
+or
+
+```{r}
+
+select_abundance %>% 
+  map(~summarise(., row_sums = colSums(.)))
+
+```
+
+We filtered our data by `n_years > 10`, let's increase this number selecting only studies with more that 30 years of sampling.
+
+```{r}
+
+bio_list <- split_taxa %>% map(~ .x %>%
+                      group_by(id) %>% 
+                      mutate(nyear = n_distinct(year)) %>%
+                      filter(nyear > 30) %>% 
+                      select(id:sp,-nyear))
+```
+
+Now we have some elements in our list with 0, meaning that there is no study with more than 30 years for that specific taxa. We can use either `discard()` or `keep()` to exclude or keep elements in our list, respectively. Let's exclude those elements without any data.
+
+```{r}
+
+discard_elements <- bio_list %>% discard(., ~nrow(.) == 0)
+
+
+```
+
+Now, instead of 13 taxa we have seven.
+
+If you want to exclude elements in a list by name, we can use `list_modify("listElementName" = zap())`. Note that, previously, we could use `list_modify = "NULL"`, but this option is now deprecated. For example, let's exclude "Benthos" from our object
+
+```{r}
+
+no_benthos <- discard_elements %>% 
+  list_modify("Benthos" = zap())
+  
+
+```
+
+Let's create a more complex object now. As we have both abundance and biomass column, let's create a new column representing presence/absence (pres_ab). First, though, we have to deal with the NA's in our data. We can use `replace_na()` for that.
+
+```{r}
+
+presence_abs <- no_benthos %>% 
+  map(~ .x %>%
+                      mutate(i = row_number()) %>% 
+                      group_by(id) %>% 
+                      replace_na(list(abundance = 0, biomass = 0)) %>% 
+                      mutate(pres_ab = abundance+biomass,
+                             pres_ab = case_when(pres_ab > 0 ~ 1,
+                                   T ~ 0)))
+```
+
+Here I introduced a new (very useful) function `case_when()`. In the current example, I created the *"pres_ab"* column and asked the function to assign 1 (presence) case when the sum of abundance+biomass is higher than 0 and assign 0 when the opposite is true (`T ~ 0`) . You can use `case_when()` in many different ways, being very useful when we have to create new columns based on other columns or change values within columns.
+
+As in the long format we don't have species assigned with 0 either in abundance or biomass, *"pres_ab"* column will be always 1 (my bad haha). Let's transform the data into the wide format to get presences and absences indeed. If we were not working with lists, we should transform each taxa separately. We can now combine `purrr` with `pivot_wider()` and transform all elements of our list.
+
+```{r}
+wide_list <- presence_abs %>% 
+  map(~ .x %>%
+        group_by(id,year,sp) %>% 
+        select(-plot,-abundance, -biomass) %>%
+        summarise(pres_ab = sum(pres_ab)) %>%
+        mutate(pres_ab = case_when(pres_ab > 0 ~ 1,
+                                   T ~ 0))%>% 
+        ungroup %>% 
+        arrange(sp) %>% # sp names in alphabetic order
+        pivot_wider(names_from = "sp", values_from = "pres_ab", 
+                    values_fill = list(pres_ab=0)))
+
+```
+
+Now we have 0's and 1's. As we have species presences absences per year, we can check species gains and losses. For that we transform our data back into the long format (now with 0's and 1's) and use `case_when()` again to create the new column
+
+As we are working with temporal data, we can use `case_when()` combined with `lag()` or `lead()` to analyse either the previous or next row in our data set, respectively. For example, let's create a new column to check species gains and losses per year.
+
+Now I will transform the lists into the long format again and check species gains and losses using `case_when()`.
+
+```{r}
+long_list <-wide_list %>% 
+  map(~.x %>% 
+        pivot_longer(-c(id,year),names_to = "sp", values_to = "pres_ab"))
+```
+
+Now we can check how each species is changing over time
+
+```{r}
+
+gain_loss <- long_list %>% 
+  map(~.x %>% 
+        group_by(id,sp) %>% 
+        arrange(year, .by_group = TRUE)%>%
+    mutate(gain_loss = case_when(row_number() == 1 ~ "NA",
+                                 lag(pres_ab == 0) & pres_ab == 1  ~ "gain", 
+                                 lag(pres_ab == 1) & pres_ab == 0 ~ "loss",
+                                 lag(pres_ab == 0) & pres_ab == 0  ~ "persist_ab",
+                         T ~ "persist_pres")))
+```
+
+Here I first grouped the data by study id and species, then I ordered the year, separately, by group. With `mutate()`, I created the column gain_loss, putting NA to the first year of each study, since we cant have gains or losses at the first year. Further, I assigned *gain* when the species was absent at the previous year (`lag(pres_ab==0)`) and present in the next one (`pres_ab==1`) and the opposite to *loss*. Also, if the species persisted absent or present, but we could also use "NA" if the idea is to check only gains and losses.
+
+Another nice trick, when dealing with lists, is that sometimes we need to use the name of the elements in a list as a column. For example, here the name of the elements in our list is the taxa's name. We can use `imap` and `mutate` to create a new column based on these names. With `mutate` (in `dplyr 1.0.0`) we can also select the position of the new column with `.before` and `.after`, otherwise the new column will be the last one.
+
+```{r}
+
+
+taxa_list <- gain_loss %>% imap(., ~mutate(.x, TAXA = .y, .after = year))
+
+
+
+```
+
+# Some other tricks with `purrr`
+
+Sometimes, we have to deal with nested lists. I will not focus on nested lists here, but just out of curiosity, let's split our list once more, now based on the different studies we have. So we will have lists based on taxa and nested based on studies.
+
+```{r}
+
+nest_list <- wide_list %>% 
+  map(~split(.,.$id))
+
+```
+
+Usually, when I have such kind of data, I use nested `maps` - not sure if this is the most elegant approach though. For example, let's say we want to check the species richness for each taxa in each study based on years of sampling. I'd do something like this:
+
+```{r}
+
+double_map <- nest_list %>% map(map, ~mutate(.,richness = rowSums(.[-1:-2]), .after = year))
+
+```
+
+To work with two lists, we can use `map2()` . A simple example:
+
+```{r}
+
+list1<- as.list(c(a = 1, b = 2 ,c = 3))
+
+list2<- as.list(c(a = 1, b = 2 ,c = 3))
+
+map2(list1, list2, sum)
+
+```
+
+I will use more `map2()` in the following posts, but this is particular interesting for those working with functional diversity of multiple taxa. You can do the same we did here (split the data by taxa), in both community and trait data, and then use `map2()` to calculate functional diversity. It will not work here of course, but something like this might work for you:
+
+```{r eval=F, echo=T}
+
+library(FD)
+t1 <- map2(list_trait, list_comm, dbFD) # list with traits, list with communities and the function you want to apply (in this case, dbFD)
+
+```
+
+and then you can get the CWM, Rao or whatever metric you want from the `dbFD()` function
+
+```{r eval=F, echo=T}
+
+
+list_CWM <- t1 %>% map("CWM")
+
+list_RaoQ <- t1 %>% map("RaoQ") %>% 
+  map(~ .x %>% as.data.frame())
+
+
+
+```
+
+Another important trick we can do with `purrr` is to load multiple data into R. Sometimes we download ecological data and the `.csv` files come separated into multiple zip files. If you have faced that, and had to extract each file one by one, guess what? You can run them all at once with `purrr`:
+
+```{r eval=F, echo=T}
+
+manyfiles <- list.files(here("data"), pattern = "*.csv", full.names = T) %>%
+        map_df(~vroom(.)) #here("data"), as I explained at the beginning of this post, is where your files are located in your Rproject
+
+```
+
+In summary, `tidyverse` has many functions that can boost our data analysis and how / when to use them will depend on your data and what you want to get from it. I hope to have kicked off some new useful functions and tricks.

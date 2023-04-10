@@ -1,0 +1,16 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/data_viz/index.html",
+      "/posts/data_wrangling/index.html",
+      "/posts/stat_analysis/index.html"
+    ]
+  },
+  {
+    "listing": "/publications.html",
+    "items": [
+      "/publications/paper_dd_gcb/index.html"
+    ]
+  }
+]
