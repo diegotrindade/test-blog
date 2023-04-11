@@ -1,14 +1,26 @@
 ---
-title: "Posts"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: true
-  filter-ui: true
-  fields: [date, title, reading-time, description, categories]
-  feed: true
-page-layout: full
-title-block-banner: false
+title: ""
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/diegotrindade
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/trindpf
+    - icon: ResearchGate  
+      text: ResearchGate
+      href: https://www.researchgate.net/profile/Diego-Trindade
+    - icon: Gmail  
+      text: Email
+      href: mailto:dpftrindade@gmail.com
 ---
+
+I am a PhD student at [University of Tartu](https://ut.ee/en), [Macroecology workgroup](https://macroecology.ut.ee/en/). <br>
+My research focus on understanding how ecological communities are assembled in space and time
+
+::: {style="text-align: center"}
+[Read More →](../about)
+:::

@@ -70,10 +70,10 @@ library(maps)
 #devtools::install_dev("vroom")
 library(vroom)
 
-biotime_df <- vroom(here("posts", 
+biotime_df <- vroom(here("posts", "rstats", 
                          "biotime.zip"), delim = ",")
 
-biotime_metadata <- vroom(here("posts", 
+biotime_metadata <- vroom(here("posts", "rstats",
                                "biotime_meta.csv"), delim = ",")
 
 

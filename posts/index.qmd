@@ -1,0 +1,20 @@
+---
+title: Some posts on how to handle and analyse ecological data
+description: ""
+author: "Diego P.F. Trindade"
+listing:
+  - id: rstats
+    contents: "rstats/*/index.qmd"
+    sort: "date desc"
+    categories: true
+    sort-ui: true
+    filter-ui: true
+page-layout: full
+title-block-banner: false
+toc: true
+---
+
+## Rstats posts
+
+:::{#rstats}
+:::

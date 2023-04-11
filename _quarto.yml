@@ -6,17 +6,24 @@ execute:
   
 website:
   title: "Diego P.F. Trindade"
+  google-analytics: UA-143198225-1
   navbar:
     left:
-      - href: about.qmd
+      
+      - href: about/index.qmd
         text: Home
-      - index.qmd
-      - href: publications.qmd
+      - href: posts/index.qmd
+        text: Posts
+      - href: publications/index.qmd
         text: Publications
       
       
 format:
   html:
+    grid:
+      sidebar-width: 300px
+      margin-width: 450px
+      body-width: 600px
     theme: 
       light: minty
       dark: slate

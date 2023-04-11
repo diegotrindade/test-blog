@@ -1,0 +1,37 @@
+---
+title: "Cross-scale drivers of woody plant species commonness and rarity in the Brazilian drylands"
+author: ["Bruno X. Pinho", "Diego P. F. Trindade", "Carlos A. Peres", "Davi Jamelli", "Renato A. F. de Lima", "Elâine M. S. Ribeiro", "Felipe P. L. Melo", "Inara R. Leal", "Marcelo Tabarelli"]
+date: '2022-06-14'
+slug: aor-jbi
+html:
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: true
+  warning: false
+  message: false
+categories: [paper]
+image: "featured.jpg"
+---
+
+::: column-body-outset
+### Aim
+
+Locally abundant species are typically widespread, while locally scarce species are geographically restricted---the so-called abundance-occupancy relationships (AORs). AORs help explain the drivers of species rarity and community assembly, but little is known about how variation around such relationship is driven by species traits and niche-based processes, particularly in tropical woody plants. We tested the hypothesis that AORs in tropical dryland woody plants are positive and mediated by niche and functional traits along environmental gradients.
+
+### Location
+
+The Caatinga dry forest and Cerrado savannah, Brazil.
+
+### Methods
+
+We aggregated abundance and occurrence data into grid-cells representing local (10-km) to landscape scales (50-km). We calculated species mean relative abundance at occupied grid-cells (local abundance) and the proportion of grid-cells occupied (occupancy), and estimated their niche breadth and marginality along multivariate environmental gradients.
+
+### Results
+
+AORs were positive but weak at different scales in both regions due to some locally abundant but geographically restricted species, with most species being both locally and geographically rare. Cross-species variation in local abundance was largely unpredictable, but occupancy was strongly driven by niche and functional traits, with a prominent negative effect of niche marginality. Geographically restricted species were associated with rare habitats, such as wetter and less intensively used habitats. Large seeds and abiotic dispersal favoured occupancy in Caatinga at small and large spatial scales, respectively, whereas species with conservative leaves were more widespread across scales in Cerrado.
+
+### Main conclusions
+
+Woody plants in dry tropical biotas exhibit weak AORs, a pattern likely related to low habitat availability and dispersal limitation. Caatinga and Cerrado biotas emerge as environmentally structured at multiple spatial scales, with several habitat-specialist rare species bearing specific regenerative and resource-use traits and relying on conditions threatened by climate change and land-use intensification. Examining AORs through the lens of niche, functional traits and spatial scales enables mapping patterns and drivers of species commonness and rarity, enhancing understanding of species assembly and providing tools for biodiversity conservation.
+:::

@@ -1,7 +1,7 @@
 ---
 title: "#1 Data wrangling in ecology with `tidyverse`"
 author: Diego P.F. Trindade
-date: '2020-07-15'
+date: '2020-07-14'
 slug: data-wrangling-in-ecology
 html:
     fig-width: 8
@@ -108,7 +108,7 @@ First we read the file
 
 ```{r eval = F}
 
-metadata <- read.csv(here("posts", 
+metadata <- read.csv(here("posts", "rstats", 
                           "biotime_meta.csv"), header=T, sep=",") 
 ```
 
@@ -137,10 +137,10 @@ For reading the .zip file we simply change from `read.csv`(base R) to `vroom`.
 #devtools::install_dev("vroom")
 library(vroom)
 
-biotime_df <- vroom(here("posts", 
+biotime_df <- vroom(here("posts", "rstats", 
                          "biotime.zip"), delim = ",")
 
-biotime_metadata <- vroom(here("posts", 
+biotime_metadata <- vroom(here("posts", "rstats", 
                                "biotime_meta.csv"), delim = ",")
 
 
