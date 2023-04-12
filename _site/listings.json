@@ -1,0 +1,37 @@
+[
+  {
+    "listing": "/posts/index.html",
+    "items": [
+      "/posts/rstats/stat_analysis/index.html",
+      "/posts/rstats/data_viz/index.html",
+      "/posts/rstats/data_wrangling/index.html"
+    ]
+  },
+  {
+    "listing": "/publications/index.html",
+    "items": [
+      "/publications/published-papers/paper_alexandre/index.html",
+      "/publications/published-papers/paper_pollen/index.html",
+      "/publications/published-papers/paper_aor/index.html",
+      "/publications/published-papers/paper_czech_jbi/index.html",
+      "/publications/published-papers/paper_lichens/index.html",
+      "/publications/published-papers/paper_dd_gcb/index.html",
+      "/publications/published-papers/paper_onto_caatinga_jvs/index.html"
+    ]
+  },
+  {
+    "listing": "/about/index.html",
+    "items": [
+      "/publications/published-papers/paper_alexandre/index.html",
+      "/publications/published-papers/paper_pollen/index.html",
+      "/publications/published-papers/paper_aor/index.html",
+      "/publications/published-papers/paper_czech_jbi/index.html",
+      "/publications/published-papers/paper_lichens/index.html",
+      "/publications/published-papers/paper_dd_gcb/index.html",
+      "/publications/published-papers/paper_onto_caatinga_jvs/index.html",
+      "/posts/rstats/stat_analysis/index.html",
+      "/posts/rstats/data_viz/index.html",
+      "/posts/rstats/data_wrangling/index.html"
+    ]
+  }
+]

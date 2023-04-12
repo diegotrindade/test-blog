@@ -18,8 +18,7 @@ about:
       href: mailto:dpftrindade@gmail.com
 ---
 
-I am a PhD student at [University of Tartu](https://ut.ee/en), [Macroecology workgroup](https://macroecology.ut.ee/en/). <br>
-My research focus on understanding how ecological communities are assembled in space and time
+I am a PhD student at [University of Tartu](https://ut.ee/en), [Macroecology workgroup](https://macroecology.ut.ee/en/). <br> My research focus on understanding how ecological communities are assembled in space and time
 
 ::: {style="text-align: center"}
 [Read More →](../about)

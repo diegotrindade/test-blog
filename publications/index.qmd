@@ -1,5 +1,5 @@
 ---
-title: Publications {{< fa books >}}
+title: Publications
 description: "This section contains my ongoing research"
 author: ""
 listing:
@@ -23,15 +23,15 @@ toc: true
 
 ## Published Papers
 
-:::{#published-papers}
+::: {#published-papers}
 :::
 
 ## Book chapters
 
-:::{#books}
+::: {#books}
 :::
 
 ## Manuscripts in progress
 
-:::{#under-review}
+::: {#under-review}
 :::

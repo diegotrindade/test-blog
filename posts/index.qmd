@@ -4,6 +4,7 @@ description: ""
 author: "Diego P.F. Trindade"
 listing:
   - id: rstats
+    max-description-length: 500
     contents: "rstats/*/index.qmd"
     sort: "date desc"
     categories: true
@@ -16,5 +17,5 @@ toc: true
 
 ## Rstats posts
 
-:::{#rstats}
+::: {#rstats}
 :::

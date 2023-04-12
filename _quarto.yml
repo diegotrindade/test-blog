@@ -17,13 +17,12 @@ website:
       - href: publications/index.qmd
         text: Publications
       
-      
+page-footer:
+    left: "© 2022 Diego Trindade"
+    center: "powered by [quarto](https://quarto.org)"
+    
 format:
   html:
-    grid:
-      sidebar-width: 300px
-      margin-width: 450px
-      body-width: 600px
     theme: 
       light: minty
       dark: slate
