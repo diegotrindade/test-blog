@@ -1,0 +1,20 @@
+---
+title: "Murundus ativos de Atta sp. reduzem a cobertura de crostas biológicas de solo (CBS) na Caatinga"
+author: ["Diego P.F. Trindade"]
+date: '2019-06-12'
+slug: soil-crust
+html:
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: true
+  warning: false
+  message: false
+categories: [soil-crust, chapter]
+---
+
+# Abstract
+
+As formigas do gênero *Atta* removem uma grande quantidade de solo na construção dos seus ninhos e formam estruturas conspícuas denominadas "murundus". Essa remoção suprime a vegetação lenhosa de pequeno porte e também pode reduzir a cobertura das crostas biológicas de solo (CBS). As CBS são formadas por cianobactérias, algas, líquens e briófitas, que têm a capacidade de diminuir a erosão e aumentar a qualidade nutricional do solo. Com isso, o objetivo deste estudo foi avaliar se a cobertura de CBS é influenciada pela atividade dos murundus, bem como pela presença de vegetação no seu entorno. O estudo foi desenvolvido no Parque Nacional do Catimbau, Pernambuco, onde foi estimada a cobertura das CBS com parcelas de 40 cm<sup>2</sup> em murundus ativos e inativos. Os resultados demonstraram que murundus ativos reduzem drasticamente a cobertura de CBS e que a vegetação não exerce influência nesse processo. Esses resultados sugerem que, caso a densidade de formigas cortadeiras aumente em um curto espaço de tempo, a cobertura das CBS na Caatinga pode sofrer uma redução significativa.
+
+**Trindade D.P.F.** (2015). Murundus ativos de *Atta sp.* reduzem a cobertura de crostas biológicas de solo (CBS) na Caatinga. In [*Ecologia e Conservação da Caatinga curso de campo 2015 (eds. FFS Siqueira et al.). Recife: UFPE*](https://editora.ufpe.br/books/catalog/view/127/137/376)

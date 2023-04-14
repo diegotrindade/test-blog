@@ -1,0 +1,57 @@
++++
+title = "Efeito do proprietário por formigas dominantes e especialistas na Caatinga"
+date = "2019-06-13"
+
+authors = ["PHA Sena, CM Knolchelmann, DPF Trindade, LS Reis, MMRP Dias, JD Ribeiro-Neto & FFS Siqueira"]
+
+# Publication type.
+# Legend:
+# 0 = Uncategorized
+# 1 = Conference proceedings
+# 2 = Journal
+# 3 = Work in progress
+# 4 = Technical report
+# 5 = Book
+# 6 = Book chapter
+publication_types = ["6"]
+
+# Publication name and optional abbreviated version.
+publication = "In *Ecologia e Conservação da Caatinga curso de campo 2015 (eds. FFS Siqueira et al.). Recife: UFPE*."
+publication_short = ""
+
+# Abstract and optional shortened version.
+abstract = "Formigas são organismos eussociais, caracterizados por dividir tarefas entre membros de um mesmo grupo. Uma destas funções é a defesa do ninho, a qual pode ser explicada pelo efeito do proprietário, com defesa mais eficiente nas imediações do ninho do que em locais mais distantes dele. Neste sentido, testamos se o efeito do proprietário existe para duas espécies de formigas, avaliando o tempo de detecção e subjugação em duas distâncias a partir do ninho. Para examinar a eficiência do ataque de *Dorymyrmex thoracicus* (dominante) e *Dinoponera quadriceps* (especialista) foram amostrados nove ninhos de cada espécie. Em cada ninho, foram dispostos dois tratamentos (ninho e controle) com iscas de cupim. Nossos resultados não corroboraram a hipótese do efeito do proprietário, visto que não houve diferença na proteção próxima e distante do ninho. Isso pode ter ocorrido por três motivos: (1) o efeito do proprietário é inexistente; (2) as formigas estavam forrageando, não protegendo o ninho ou (3) a área de proteção do ninho é maior do que a estudada. Os resultados obtidos e as novas hipóteses sugeridas podem gerar subsídios para outros estudos que visem responder sobre o efeito do proprietário e o comportamento de formigas, sobretudo na Caatinga."
+
+abstract_short = ""
+
+# Featured image thumbnail (optional)
+image_preview = ""
+
+selected = false
+
+projects = []
+
+# Links (optional).
+url_pdf = ""
+url_preprint = ""
+url_code = ""
+url_dataset = ""
+url_project = ""
+url_slides = ""
+url_video = ""
+url_poster = ""
+url_source = ""
+
+url_custom = []
+
+# Does the content use math formatting?
+math = true
+
+# Does the content use source code highlighting?
+highlight = true
+
+[header]
+image = ""
+caption = ""
+
++++

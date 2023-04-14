@@ -24,8 +24,8 @@ page-footer:
 format:
   html:
     theme: 
-      light: minty
-      dark: slate
+      - dark
+      
     css: styles.css
     toc: true
 

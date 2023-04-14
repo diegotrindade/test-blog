@@ -6,19 +6,17 @@ listing:
   - id: published-papers
     contents: "published-papers/*/index.qmd"
     sort: "date desc"
-    categories: true
+    sort-ui: true
+    filter-ui: true
   - id: books
     contents: "books/*/index.qmd"
     sort: "date desc"
-    categories: true
   - id: under-review
     contents: "under-review/*/index.qmd"
     sort: "date desc"
-    categories: true
-    sort-ui: true
-    filter-ui: true
+    
 page-layout: full
-toc: true
+toc: false
 ---
 
 ## Published Papers

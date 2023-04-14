@@ -1,0 +1,20 @@
+---
+title: "A influência da distância para florestas no controle biológico de cultivos na Caatinga"
+author: ["M Delgado-Jaramillo", "CMC Rocha", "CES Dalotto", "DPF Trindade", "GS Souza", "FM de Oliveira", "IR Leal"]
+date: '2019-06-13'
+slug: atta
+html:
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: true
+  warning: false
+  message: false
+categories: [soil-crust, chapter]
+---
+
+# Abstract and optional shortened version.
+
+Entender como serviços ecossistêmicos de controle biológico atuam sob cultivos pode ser muito útil para otimizar a produção agrícola, conservação e restauração de ecossistemas. Este enfoque adquire importância em áreas protegidas onde o uso de agrotóxicos pode comprometer seus objetivos de conservação, como acontece no Parque Nacional Catimbau - PE. Neste contexto, surge o objetivo de determinar a possível influência da distância da floresta no controle da herbivoria em culturas de milho e mandioca. Para isso, foram feitos 4 transectos perpendiculares à floresta de 100 m divididos em 5 pontos de amostragem em 2 plantações. Em cada ponto foram avaliados ataques de formigas a herbívoros e coletados 4 folhas para avaliar número de folhas e área foliar com herbivoria. Foram observados dois ataques de formigas no milho próximo a floresta, as formigas não forragearam em plantas de mandioca. Distâncias próximas à floresta não apresentaram evidências significativas de menor herbivoria. Não se pode concluir que proximidade da floresta está provendo mais serviços ecossistêmicos aos cultivos.
+
+Delgado-Jaramillo, M., Rocha, C.M.C., Dalotto, C.E.S., **Trindade D.P.F.**, Souza G.S., Oliveira F.M. & Leal I.R. (2015). A influência da distância para florestas no controle biológico de cultivos na Caatinga. In [*Ecologia e Conservação da Caatinga curso de campo 2015 (eds. FFS Siqueira et al.). Recife: UFPE*](https://editora.ufpe.br/books/catalog/view/127/137/376)

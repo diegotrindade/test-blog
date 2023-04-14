@@ -1,0 +1,57 @@
++++
+title = "Influência do uso do solo na cobertura de crostas biológicas de solo em áreas de Caatinga"
+date = "2019-06-13"
+
+authors = ["DPF Trindade, CMC Rocha, CES Dalotto, GS Souza, M Delgado-Jaramillo, MJS Specht & M Tabarelli"]
+
+# Publication type.
+# Legend:
+# 0 = Uncategorized
+# 1 = Conference proceedings
+# 2 = Journal
+# 3 = Work in progress
+# 4 = Technical report
+# 5 = Book
+# 6 = Book chapter
+publication_types = ["6"]
+
+# Publication name and optional abbreviated version.
+publication = "In *Ecologia e Conservação da Caatinga curso de campo 2015 (eds. FFS Siqueira et al.). Recife: UFPE*."
+publication_short = ""
+
+# Abstract and optional shortened version.
+abstract = "Solos arenosos de florestas tropicais secas são essencialmente pobres em nutrientes. Nesses ambientes, observa-se a presença frequente de organismos associados, que se estabelecem no solo e nas rochas tendo capacidade de fixar N2 e CO2 atmosférico, denominados como soil crusts. Nosso objetivo foi avaliar como diferentes usos de solo afetam a cobertura dos soil crusts na Caatinga. Desenvolvemos este estudo no Parque Nacional do Catimbau, Pernambuco, onde foi estimada a cobertura de soil crust com parcelas de 40 cm<sup>2</sup> em cinco áreas: área de agricultura abandonada há 18 e 2 anos, área de agricultura em atividade, trilha de bode e floresta madura. Também foram coletadas amostras de solo com e sem soil crust para avaliar diferença de pesos. Os resultados mostraram que a cobertura aumenta em estágios de regeneração mais avançados e que diminui em áreas de agricultura e trilhas de bode. O peso das amostras não diferiu, indicando que a presença dessas associações não incrementaria a quantidade água no solo, com o método que utilizamos. Sugerimos que áreas com níveis intermediários de radiação e umidade são mais favoráveis para a presença de soil crust. Contrariamente, áreas com excesso de radiação, pisoteio e revolvimento do solo não permitem o estabelecimento dessas associações."
+
+abstract_short = ""
+
+# Featured image thumbnail (optional)
+image_preview = ""
+
+selected = false
+
+projects = []
+
+# Links (optional).
+url_pdf = ""
+url_preprint = ""
+url_code = ""
+url_dataset = ""
+url_project = ""
+url_slides = ""
+url_video = ""
+url_poster = ""
+url_source = ""
+
+url_custom = []
+
+# Does the content use math formatting?
+math = true
+
+# Does the content use source code highlighting?
+highlight = true
+
+[header]
+image = ""
+caption = ""
+
++++
