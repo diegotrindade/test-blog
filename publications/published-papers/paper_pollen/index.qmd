@@ -1,6 +1,6 @@
 ---
 title: "Observed and dark diversity dynamics over millennial time scales: fast life-history traits linked to expansion lags of plants in northern Europe"
-author: ["DPF Trindade", "CP Carmona", "Triin Reitalu", "M Pärtel"]
+subtitle: Diego P.F. Trindade, Carlos P. Carmona, Triin Reitalu & Meelis Pärtel
 date: '2023-01-11'
 slug: dd-procb
 html:
@@ -10,11 +10,20 @@ execute:
   echo: true
   warning: false
   message: false
-categories: [paper]
 image: "featured.jpg"
 ---
+::: {style="text-align: left"}
+<button type="button" class="btn btn-outline-success"><a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2022.1904">PDF</a></button>
+:::
 
 ::: column-body-outset
 
+## Abstract
+
 Global change drivers (e.g. climate and land use) affect the species and functional traits observed in a local site but also its dark diversity---the set of species and traits locally suitable but absent. Dark diversity links regional and local scales and, over time, reveals taxa under expansion lags by depicting the potential biodiversity that remains suitable but is absent locally. Since global change effects on biodiversity are both spatially and temporally scale dependent, examining long-term temporal dynamics in observed and dark diversity would be relevant to assessing and foreseeing biodiversity change. Here, we used sedimentary pollen data to examine how both taxonomic and functional observed and dark diversity changed over the past 14 500 years in northern Europe. We found that taxonomic and functional observed and dark diversity increased over time, especially after the Late Glacial and during the Late Holocene. However, dark diversity dynamics revealed expansion lags related to species' functional characteristics (dispersal limitation and stress intolerance) and an extensive functional redundancy when compared to taxa in observed diversity. We highlight that assessing observed and dark diversity dynamics is a promising tool to examine biodiversity change across spatial scales, its possible causes, and functional consequences.
+
+**Trindade, D.P.F.**, Carmona, C.P., Reitalu, T. & Pärtel, M. (2023). Observed and dark diversity dynamics over millennial time scales: fast life-history traits linked to expansion lags of plants in northern Europe. Proceedings of the Royal Society B: Biological Sciences, 290, 20221904.
 :::
+
+
+

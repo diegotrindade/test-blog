@@ -1,6 +1,5 @@
 ---
 title: "The role of seed rain and soil seed bank in the regeneration of a Caatinga dry forest following slash-and-burn agriculture"
-description: "Land-use changes have contributed to an increased interest in understanding the drivers of forest regeneration in human-modified landscapes. This is particularly true for arid ecosystems, in which regeneration is relatively less known, but more sensitive to land-use intensification and climate change. This paper aims to identify the relative contribution of seed rain and soil seed banks for the regeneration of the Caatinga dry forest in northeastern Brazil as well as their drivers..."
 author: ["Alexandre S. de Paula", "Julia C. Sfair","Diego P. F. Trindade", "Kátia F. Rito", "Marcelo Tabarelli", "Maria F. Barros"]
 date: '2023-04-15'
 slug: seed-caat
