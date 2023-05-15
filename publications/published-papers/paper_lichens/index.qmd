@@ -14,14 +14,14 @@ image: featured.jpg
 ---
 
 ::: {style=text-align: left}
-<button type=button class=btn btn-outline-success>
-<a href=http://esamba.bo.bg.ut.ee/sandbox/groups/et/weblog/83272/attachments/57aa8/Trindade%20et%20al_2021_IntegratingDarkDiversity%26Lich.pdf?sessionID=38af669c4fd0b195594be8ba7a65d5ca11fbbfbe>PAPER</a>
-</button>
+
+<button type=button class=btn btn-outline-success> <a href=http://esamba.bo.bg.ut.ee/sandbox/groups/et/weblog/83272/attachments/57aa8/Trindade%20et%20al_2021_IntegratingDarkDiversity%26Lich.pdf?sessionID=38af669c4fd0b195594be8ba7a65d5ca11fbbfbe>PAPER</a> 
+</button> 
+
 :::
 
 ::: column-body-outset
 Mountains provide a timely opportunity to examine the potential effects of climate change on biodiversity. However, nature conservation in mountain areas have mostly focused on the observed part of biodiversity, not revealing the suitable but absent species---dark diversity. Dark diversity allows calculating the community completeness, indicating whether sites should be restored (low completeness) or conserved (high completeness). Functional traits can be added, showing what groups should be focused on. Here we assessed changes in taxonomic and functional observed and dark diversity of epiphytic lichens along elevational transects in Northern Italy spruce forests. Eight transects (900--1900 m) were selected, resulting in 48 plots and 240 trees, in which lichens were sampled using four quadrats per tree (10 × 50 cm). Dark diversity was estimated based on species co-occurrence (Beals index). We considered functional traits related to growth form, photobiont type and reproductive strategy. Linear and Dirichlet regressions were used to examine changes in taxonomic metrics and functional traits along gradient. Our results showed that all taxonomic metrics increased with elevation and functional traits of lichens differed between observed and dark diversity. At low elevations, due to low completeness and harsh conditions, both restoration and conservation activities are needed, focusing on crustose species. Towards high elevations, conservation is more important to prevent species pool losses, focusing on macrolichens, lichens with *Trentepohlia* and sexual reproduction. Finally, dark diversity and functional traits provide a novel tool to enhance nature conservation, indicating particular threatened groups, creating windows of opportunities to protect species from both local and regional extinctions.
 :::
 
-
-*Citation*: **Trindade, D.P.F.**, Pärtel, M., Carmona, C.P., Randlane, T., Nascimbene, J., 2021. Integrating dark diversity and functional traits to enhance nature conservation of epiphytic lichens: a case study from Northern Italy. Biodivers Conserv 30, 2565–2579. https://doi.org/10.1007/s10531-021-02211-w
+*Citation*: **Trindade, D.P.F.**, Pärtel, M., Carmona, C.P., Randlane, T., Nascimbene, J., 2021. Integrating dark diversity and functional traits to enhance nature conservation of epiphytic lichens: a case study from Northern Italy. Biodivers Conserv 30, 2565--2579. https://doi.org/10.1007/s10531-021-02211-w

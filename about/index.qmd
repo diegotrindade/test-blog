@@ -32,13 +32,15 @@ title-block-banner: false
 
 ::: {style="text-align: center"}
 ## Education
-:::
+
 
 University of Tartu - Estonia | PhD in Botany and Mycology \| 2017 - 2023
 
 Universidade Federal de Pernambuco - Brazil \| MSc in Plant Ecology \| 2015 - 2017
 
 Universidade Estadual do Sudoeste da Bahia - Brazil \| BSc in Biological Sciences \| 2010 - 2014
+
+:::
 
 ::: {style="text-align: center"}
 ## [Publications](../publications)
