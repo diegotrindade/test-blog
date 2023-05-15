@@ -9,7 +9,7 @@ about:
       href: https://github.com/diegotrindade
     - icon: twitter
       text: Twitter
-      href: https://twitter.com/trindpf
+      href: https://twitter.com/dpftrindade
     - icon: ResearchGate  
       text: ResearchGate
       href: https://www.researchgate.net/profile/Diego-Trindade
