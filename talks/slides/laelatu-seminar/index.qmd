@@ -1,5 +1,5 @@
 ---
-title: "Intro do Git and Github"
+title: "Intro to Git and Github"
 subtitle: Diego P.F. Trindade
 date: '2023-04-18'
 image: "featured.png"
@@ -20,3 +20,9 @@ image: "featured.png"
 </button>
 
 :::
+
+
+## Seminar - Macroecology Workgroup UT
+
+Short presentation given during our Macroecology spring seminar in Laelatu on how to use Git and GitHub to improve collaboration and workflow.
+

@@ -4,7 +4,7 @@ page-layout: full
 css: index.css
 listing:
   - id: publications	
-    max-description-length: 500
+    max-description-length: 800
     contents: ../publications/published-papers/**/index.qmd
     sort: "date desc"
     type: default
