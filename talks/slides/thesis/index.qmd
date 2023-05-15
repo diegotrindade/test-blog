@@ -5,8 +5,7 @@ date: '2023-05-12'
 image: "featured.png"
 ---
 
-::: {style="text-align: left"} 
-
+::: {style="text-align: left"}
 <button type="button" class="btn btn-outline-success">
 
 <a href="https://diegotrindade.github.io/thesis_presentation/#/title-slide">Slides</a>
@@ -19,12 +18,15 @@ image: "featured.png"
 
 </button>
 
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://dspace.ut.ee/bitstream/handle/10062/89586/trindade_diego.pdf?sequence=1&isAllowed=y">Thesis</a>
+
+</button>
+
 :::
 
 # PhD defense
 
-Slides of my PhD defense at the University of Tartu. 
-
-Thesis [PDF](https://dspace.ut.ee/bitstream/handle/10062/89586/trindade_diego.pdf?sequence=1&isAllowed=y)
-
+Slides of my PhD defense
 

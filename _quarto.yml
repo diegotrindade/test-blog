@@ -10,7 +10,8 @@ website:
   cookie-consent: true
 
   navbar:
-    background: "black"
+    background: black
+    pinned: true
     left:
       
       - href: about/index.qmd

@@ -11,25 +11,25 @@ listing:
   - id: books
     contents: "books/*/index.qmd"
     sort: "date desc"
-  - id: under-review
-    contents: "under-review/*/index.qmd"
-    sort: "date desc"
     
 page-layout: full
 toc: false
 ---
 
+::: {style="text-align: center"}
+
 ## Published Papers
+
+:::
 
 ::: {#published-papers}
 :::
 
+::: {style="text-align: center"}
+
 ## Book chapters
+:::
 
 ::: {#books}
 :::
 
-## Manuscripts in progress
-
-::: {#under-review}
-:::
