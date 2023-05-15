@@ -20,8 +20,8 @@ website:
         text: Posts
       - href: publications/index.qmd
         text: Publications
-      - href: talks/index.qmd
-        text: Talks
+      - href: presentations/index.qmd
+        text: Presentations
       - href: CV/index.qmd
         text: CV
         
