@@ -12,7 +12,7 @@ listing:
     filter-ui: true
 page-layout: full
 title-block-banner: false
-toc: true
+toc: false
 ---
 
 ## Rstats posts

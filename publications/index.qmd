@@ -1,6 +1,6 @@
 ---
 title: Publications
-description: "This section contains my ongoing research"
+description: ""
 author: ""
 listing:
   - id: published-papers

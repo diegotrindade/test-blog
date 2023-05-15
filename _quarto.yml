@@ -16,10 +16,10 @@ website:
       
       - href: about/index.qmd
         text: Home
-      - href: posts/index.qmd
-        text: Posts
       - href: publications/index.qmd
         text: Publications
+      - href: posts/index.qmd
+        text: Posts
       - href: presentations/index.qmd
         text: Presentations
       - href: CV/index.qmd
