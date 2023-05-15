@@ -15,8 +15,8 @@ image: featured.png
 
 ::: {style=text-align: left} 
 
-<button type=button class=btn btn-outline-success> 
-<a href=https://onlinelibrary.wiley.com/doi/abs/10.1111/jvs.12896>PAPER</a> 
+<button type="button" class="btn btn-outline-success">
+<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jvs.12896">PAPER</a> 
 </button> 
 
 :::
