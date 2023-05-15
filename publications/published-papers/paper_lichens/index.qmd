@@ -15,7 +15,8 @@ image: featured.jpg
 
 ::: {style=text-align: left}
 
-<button type=button class=btn btn-outline-success> <a href=http://esamba.bo.bg.ut.ee/sandbox/groups/et/weblog/83272/attachments/57aa8/Trindade%20et%20al_2021_IntegratingDarkDiversity%26Lich.pdf?sessionID=38af669c4fd0b195594be8ba7a65d5ca11fbbfbe>PAPER</a> 
+<button type=button class=btn btn-outline-success> 
+<a href="http://esamba.bo.bg.ut.ee/sandbox/groups/et/weblog/83272/attachments/57aa8/Trindade%20et%20al_2021_IntegratingDarkDiversity%26Lich.pdf?sessionID=38af669c4fd0b195594be8ba7a65d5ca11fbbfbe">PAPER</a>
 </button> 
 
 :::
