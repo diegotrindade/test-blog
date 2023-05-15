@@ -13,7 +13,7 @@ execute:
 image: featured.jpg
 ---
 
-::: {style=text-align: left}
+::: {style="text-align: left"}
 
 <button type="button" class="btn btn-outline-success">
 <a href="https://link.springer.com/article/10.1007/s10531-021-02211-w">PAPER</a>
