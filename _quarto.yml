@@ -7,7 +7,10 @@ execute:
 website:
   title: "Diego P.F. Trindade"
   google-analytics: UA-143198225-1
+  cookie-consent: true
+
   navbar:
+    background: "black"
     left:
       
       - href: about/index.qmd
@@ -20,6 +23,7 @@ website:
         text: Talks
       - href: CV/index.qmd
         text: CV
+        
       
 page-footer:
     left: "© 2022 Diego Trindade"
@@ -35,7 +39,6 @@ format:
     toc: true
 
 editor: visual
-
 
 
 

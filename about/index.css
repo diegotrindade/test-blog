@@ -1,15 +1,21 @@
 /* css styles */
 
 h1 {
-  font-size: 4em;
-  color: #51AA75;
+  font-size: 2em;
+  color: white;
   font-weight: 400;
 }
 
 h2 {
-  font-size: 2em;
-  color: white;
+  font-size: 1.7em;
+  color: #beffab;
 }
+
+h3 {
+  font-size: 1.5em;
+  color: #fca644;
+}
+
 
 div.quarto-post .thumbnail {
   flex-basis: 30%;

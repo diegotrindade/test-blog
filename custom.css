@@ -1,34 +1,77 @@
-/*-- scss:defaults --*/
-$body-bg: #333333 !default;
-$body-color: #9EEBCF;
-$link-color: white;
-$font-family-sans-serif: 'IBM Plex Sans';
-$font-family-monospace: 'IBM Plex Sans';
-
-$navbar-bg: #333333;
-$navbar-fg: #9EEBCF;
-$navbar-hl: #9EEBCF;
-
-/*-- scss:rules --*/
-@font-face {
-    font-family: 'Nova Square';
-    src: url('static/fonts/novasquare-regular-webfont.woff2') format('woff2'),
-         url('static/fonts/novasquare-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+/* css styles */
+div.sourceCode{
+  background-color: black;
 }
 
-@font-face {
-    font-family: 'IBM Plex Sans';
-    src: url('static/fonts/IBMPlexSans-Regular.woff2') format('woff2'),
-        url('static/fonts/IBMPlexSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
-@media screen and (min-width: 56em) {
-  html {
-    font-size: 1.1em;
+/* navbar kink */
+
+
+@media screen and (min-width: 999px) {
+  .navbar .navbar-nav .nav-link {
+    color: #ffd700;
+    font-size: 1rem;
+    text-transform: uppercase;
   }
+  .navbar .navbar-nav .nav-link:hover {
+    color: #ffd700;
+  }
+  .navbar .navbar-nav .nav-item {
+    position: relative;
+  }
+  .navbar .navbar-nav .nav-item::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #9EEBCF;
+    width: 0%;
+    content: "";
+    height: 1px;
+    transition: all 0.2s;
+  }
+  
+.navbar .navbar-nav .nav-item:hover::after {
+    width: 100%;
+  }
+}
+
+.navbar-brand>img {
+    max-height: 48px;
+    width: auto;
+    padding-right: 6px;
+}
+
+.nav-footer a{
+  color: white;
+}
+
+.active {
+  border-bottom: 1px solid #9EEBCF;
+}
+
+.navbar-brand {
+    position: relative;
+    width: 200px;
+    left: 15px;
+    background-size: contain;
+}
+
+
+
+h1 {
+  font-size: 2em;
+  color: white;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.7em;
+  color: #beffab;
+}
+
+h3 {
+  font-size: 1.5em;
+  color: #fca644;
 }

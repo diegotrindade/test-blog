@@ -17,15 +17,6 @@ listing:
     type: default
     categories: false
     max-items: 3
-  - id: talks
-    max-description-length: 500
-    contents: ../talks/slides/**/index.qmd
-    sort: "date desc"
-    type: default
-    categories: false
-    max-items: 3
-  - id: CV
-    contents: ../CV/index.qmd
     
 title-block-banner: false
 ---
@@ -34,11 +25,11 @@ title-block-banner: false
 ## Education
 
 
-University of Tartu - Estonia | PhD in Botany and Mycology \| 2017 - 2023
+PhD in Botany and Mycology \| University of Tartu - Estonia \| 2017 - 2023
 
-Universidade Federal de Pernambuco - Brazil \| MSc in Plant Ecology \| 2015 - 2017
+MSc in Plant Ecology \| Universidade Federal de Pernambuco - Brazil \|  2015 - 2017
 
-Universidade Estadual do Sudoeste da Bahia - Brazil \| BSc in Biological Sciences \| 2010 - 2014
+BSc in Biological Sciences \| Universidade Estadual do Sudoeste da Bahia - Brazil \| 2010 - 2014
 
 :::
 
