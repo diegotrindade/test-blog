@@ -1,8 +1,7 @@
 ---
 title: "The role of seed rain and soil seed bank in the regeneration of a Caatinga dry forest following slash-and-burn agriculture"
-author: ["Alexandre S. de Paula", "Julia C. Sfair","Diego P. F. Trindade", "Kátia F. Rito", "Marcelo Tabarelli", "Maria F. Barros"]
+subtitle: Alexandre S. de Paula, Julia C. Sfair, Diego P. F. Trindade, Kátia F. Rito, Marcelo Tabarelli, Maria F. Barros
 date: '2023-04-15'
-slug: seed-caat
 html:
     fig-width: 8
     fig-height: 8
@@ -10,10 +9,17 @@ execute:
   echo: true
   warning: false
   message: false
-categories: [paper]
 image: "featured.jpg"
 ---
+
+::: {style="text-align: left"}
+<button type="button" class="btn btn-outline-success">
+<a href="https://doi.org/10.1016/j.jaridenv.2023.104948">PAPER</a>
+</button>
+:::
 
 ::: column-body-outset
 Land-use changes have contributed to an increased interest in understanding the drivers of forest regeneration in human-modified landscapes. This is particularly true for arid ecosystems, in which regeneration is relatively less known, but more sensitive to land-use intensification and climate change. This paper aims to identify the relative contribution of seed rain and soil seed banks for the regeneration of the Caatinga dry forest in northeastern Brazil as well as their drivers. We monitored seed rain and soil seed bank of woody plant species during a 14-month period across 15 regenerating (4--70 yr old) and 5 old-growth forest stands. Stand age, precipitation, chronic anthropogenic disturbance, and forest aboveground biomass were our explanatory variables. A total of 5081 seeds from 61 species were recorded in the seed rain across all forest stands (1.81 intact seeds per m^2^ per month). Regenerating and old-growth stands did not differ relative to average seed rain scores, with the proportion of zoochoric seeds positively associated with forest biomass. In the seed bank, we recorded a total of 5660 seeds from 64 species (5.05 intact seeds per m^2^ per month), with no differences among stands, except for species richness; with mean seed size positively associated with stand age. Collectively, seed rain and seed bank captured only 40% of the woody regional flora, mostly dry-fruited species (70% of all species). Moreover, assemblages were dominated by a few hyper-abundant species. Our results suggest that the Caatinga dry forest supports relatively low-density and impoverished seed rain and soil seed bank. Additionally, seed rain and soil seed bank do not exhibit directional changes through forest regeneration for most of the attributes, and deviate little from the scores of old-growth forest stands. Compared to resprouting, they may pose limited influence on woody plant recruitment and dry forest regeneration across human-modified landscapes. In this context, Caatinga restoration approaches based on natural seed rain and soil seed banks may be of limited effectiveness.
 :::
+
+*Citation*: Souza de Paula, A., Sfair, J.C., **Trindade, D.P.F**., Rito, K.F., Tabarelli, M., Barros, M.F., 2023. The role of seed rain and soil seed bank in the regeneration of a Caatinga dry forest following slash-and-burn agriculture. Journal of Arid Environments 211, 104948. https://doi.org/10.1016/j.jaridenv.2023.104948

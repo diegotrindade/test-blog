@@ -1,6 +1,6 @@
 ---
-title: "A lazy blog almost never updated"
-page-layout: custom
+title: ""
+page-layout: full
 css: index.css
 listing:
   - id: publications	
@@ -17,22 +17,31 @@ listing:
     type: default
     categories: false
     max-items: 3
+  - id: talks
+    max-description-length: 500
+    contents: ../talks/slides/**/index.qmd
+    sort: "date desc"
+    type: default
+    categories: false
+    max-items: 3
+  - id: CV
+    contents: ../CV/index.qmd
     
-title-block-banner: true
+title-block-banner: false
 ---
-
-I'm a PhD candidate at the University of Tartu, Estonia. My PhD studies focus on understanding how global changes affect species gains and losses (biodiversity change) across space and time. In order to understand those changes, in a spatiotemporal context, I'm assessing how both observed and dark diversity dynamics are changing over time (the latter defined as "currently absent species that could potentially inhabit a study site"). With dark diversity, it is possible to decompose species gains and losses into two space‐related components: one associated with local dynamics (species moving from observed to dark diversity and vice versa) and another related to gains and losses of site‐specific species pool (species moving to and from the pool after regional immigration, regional extinction or change in local ecological conditions). This decomposition might improve the way we detect biodiversity change and disequilibrium dynamics (e.g. extinction debt and colonization credit). To apply and test those ideas I'm using mechanistic models, multi-taxa and long-term databases (plants, birds, lichens, pollen etc.).
 
 ::: {style="text-align: center"}
 ## Education
 :::
 
-University of Tartu \| Estonia PhD student \| Sept 2017 - Current
+University of Tartu - Estonia | PhD in Botany and Mycology \| 2017 - 2023
 
-Universidade Federal de Pernambuco \| Brazil Masters in Plant Ecology \| 2015 - 2017
+Universidade Federal de Pernambuco - Brazil \| MSc in Plant Ecology \| 2015 - 2017
+
+Universidade Estadual do Sudoeste da Bahia - Brazil \| BSc in Biological Sciences \| 2010 - 2014
 
 ::: {style="text-align: center"}
-## Publications
+## [Publications](../publications)
 :::
 
 ::: {#publications}
@@ -43,7 +52,7 @@ Universidade Federal de Pernambuco \| Brazil Masters in Plant Ecology \| 2015 - 
 :::
 
 ::: {style="text-align: center"}
-## Posts
+## [Posts](../posts)
 :::
 
 ::: {#posts}

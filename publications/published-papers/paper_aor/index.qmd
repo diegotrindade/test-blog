@@ -1,8 +1,7 @@
 ---
 title: "Cross-scale drivers of woody plant species commonness and rarity in the Brazilian drylands"
-author: ["Bruno X. Pinho", "Diego P. F. Trindade", "Carlos A. Peres", "Davi Jamelli", "Renato A. F. de Lima", "Elâine M. S. Ribeiro", "Felipe P. L. Melo", "Inara R. Leal", "Marcelo Tabarelli"]
+subtitle: Bruno X. Pinho, Diego P. F. Trindade, Carlos A. Peres, Davi Jamelli, Renato A. F. de Lima, Elâine M. S. Ribeiro, Felipe P. L. Melo, Inara R. Leal, "Marcelo Tabarelli
 date: '2022-06-14'
-slug: aor-jbi
 html:
     fig-width: 8
     fig-height: 8
@@ -10,9 +9,16 @@ execute:
   echo: true
   warning: false
   message: false
-categories: [paper]
 image: "featured.jpg"
 ---
+
+::: {style="text-align: left"}
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://onlinelibrary.wiley.com/doi/full/10.1111/ddi.13587">PAPER</a>
+
+</button>
+:::
 
 ::: column-body-outset
 ### Aim
@@ -35,3 +41,5 @@ AORs were positive but weak at different scales in both regions due to some loca
 
 Woody plants in dry tropical biotas exhibit weak AORs, a pattern likely related to low habitat availability and dispersal limitation. Caatinga and Cerrado biotas emerge as environmentally structured at multiple spatial scales, with several habitat-specialist rare species bearing specific regenerative and resource-use traits and relying on conditions threatened by climate change and land-use intensification. Examining AORs through the lens of niche, functional traits and spatial scales enables mapping patterns and drivers of species commonness and rarity, enhancing understanding of species assembly and providing tools for biodiversity conservation.
 :::
+
+*Citation*: Pinho, B.X., **Trindade, D.P.F.**, Peres, C.A., Jamelli, D., De Lima, R.A.F., Ribeiro, E.M.S., Melo, F.P.L., Leal, I.R., Tabarelli, M., 2022. Cross‐scale drivers of woody plant species commonness and rarity in the Brazilian drylands. Diversity and Distributions 28, 1497--1511. https://doi.org/10.1111/ddi.13587

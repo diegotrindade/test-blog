@@ -1,6 +1,6 @@
 ---
 title: "Water availability mediates functional shifts across ontogenetic stages in a regenerating seasonally dry tropical forest"
-author: ["Diego P. F. Trindade", "Julia C. Sfair", "Alexandre S. de Paula", "Maria F. Barros", "Marcelo Tabarelli"]
+author: Diego P. F. Trindade, Julia C. Sfair, Alexandre S. de Paula, Maria F. Barros, Marcelo Tabarelli
 date: '2020-04-15'
 slug: caat-jvs
 html:
@@ -10,10 +10,19 @@ execute:
   echo: true
   warning: false
   message: false
-categories: [paper]
-image: "featured.png"
+image: featured.png
 ---
+
+::: {style=text-align: left}
+<button type=button class=btn btn-outline-success>
+<a href=https://onlinelibrary.wiley.com/doi/abs/10.1111/jvs.12896>PAPER</a>
+</button>
+:::
 
 ::: column-body-outset
 Community assembly in regenerating forests is a key topic in ecology. Most studies examine the assembly process assessing adult individuals along the forest succession. Although the adult stage is the final outcome of the assembly process, both abiotic and biotic filters can affect community assembly during early ontogenetic stages. Here we investigate whether the functional composition and trait assembly patterns (trait convergence or divergence) change across ontogenetic stages along regenerating forest stands exposed to precipitation and chronic anthropogenic disturbance (CAD) gradients. Location: Caatinga dry forest, Catimbau National Park, Pernambuco, Brazil. Methods: Seeds (rain and bank), seedlings and adults of woody plant species were recorded across 15 forest regenerating stands (4‐70 years since land abandonment) via 0.1‐ha, exposed to precipitation and CAD gradients. Seven functional traits related to species dispersal, establishment and resource use were measured for adult individuals and used to calculate the trait values for seeds and seedlings. 20 old‐growth forest stands were used as a regional flora. Results: Functional composition (CWM) varied across ontogenetic stages as wood density increased from seeds to seedlings, while seed mass increased from seeds to both seedlings and adults. CWM also varied along precipitation/disturbance gradients but not along forest regeneration regardless the ontogenetic stage. Among seeds, dispersal distance increased towards wetter forest stands and decreased towards disturbed sites, while adult wood density increased from drier to wetter regenerating forest stands. Traits converged along the precipitation gradient but not in response to time since land abandonment. Conclusions: Caatinga dry forest regeneration is functionally structured across ontogenetic stages mediated mostly by water availability, but not over time since land abandonment. The effect of water availability on forest regeneration across ontogenetic stages highlights the complexity of species assembly in human modified landscapes, imposing important consequences considering the expected increasing aridity in the Caatinga.
 :::
+
+
+*Citation*: **Trindade, D.P.F.**, Sfair, J.C., Paula, A.S., Barros, M.F., Tabarelli, M., 2020. Water availability mediates functional shifts across ontogenetic stages in a regenerating seasonally dry tropical forest. J Veg Sci 31, 1088–1099. https://doi.org/10.1111/jvs.12896
+

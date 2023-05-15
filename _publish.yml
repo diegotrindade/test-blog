@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: "80e3799a-3b82-49b6-a194-323ce21b0dd2"
+      url: "https://diegotrindade.netlify.app"

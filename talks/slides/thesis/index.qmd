@@ -1,0 +1,22 @@
+---
+title: "PhD Thesis - presentation"
+subtitle: Diego P.F. Trindade
+date: '2023-05-12'
+image: "featured.png"
+---
+
+::: {style="text-align: left"} 
+
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://diegotrindade.github.io/thesis_presentation/#/title-slide">Slides</a>
+
+</button>
+
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://github.com/diegotrindade/thesis_presentation">GitHub Repo</a>
+
+</button>
+
+:::

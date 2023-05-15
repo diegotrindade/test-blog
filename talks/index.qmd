@@ -1,0 +1,17 @@
+---
+title: Talks
+author: "Diego P.F Trindade"
+listing:
+  - id: slides
+    contents: "slides/*/index.qmd"
+    sort: "date desc"
+    sort-ui: false
+    filter-ui: false
+    
+page-layout: full
+toc: false
+---
+
+
+::: {#slides}
+:::

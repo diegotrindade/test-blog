@@ -16,6 +16,10 @@ website:
         text: Posts
       - href: publications/index.qmd
         text: Publications
+      - href: talks/index.qmd
+        text: Talks
+      - href: CV/index.qmd
+        text: CV
       
 page-footer:
     left: "© 2022 Diego Trindade"
@@ -24,9 +28,10 @@ page-footer:
 format:
   html:
     theme: 
-      - dark
+    - dark
+    - darkly
       
-    css: styles.css
+    css: custom.css
     toc: true
 
 editor: visual

@@ -1,8 +1,7 @@
 ---
 title: "Environment and space drive the community assembly of Atlantic European grasslands: Insights from multiple facets"
-author: ["Michele Mugnai", "Diego P. F. Trindade", "Mélanie Thierry", "Krishan Kaushik", "Jan Hrček", "Lars Götzenberger"]
+subtitle: Michele Mugnai, Diego P. F. Trindade, Mélanie Thierry, Krishan Kaushik, Jan Hrček, Lars Götzenberger
 date: '2022-03-23'
-slug: czech-jbi
 html:
     fig-width: 8
     fig-height: 8
@@ -10,9 +9,14 @@ execute:
   echo: true
   warning: false
   message: false
-categories: [paper]
-image: "featured.jpg"
+image: featured.jpg
 ---
+
+::: {style="text-align: left"}
+<button type="button" class="btn btn-outline-success">
+<a href="https://onlinelibrary.wiley.com/doi/full/10.1111/jbi.14331">PAPER</a>
+</button>
+:::
 
 ::: column-body-outset
 ### Aim
@@ -39,3 +43,6 @@ Compared to alpha diversity, beta diversity was relatively high in taxonomic div
 
 Considering multiple biodiversity facets along environmental and spatial gradients enables advancing both theoretical and applied aspects of community assembly. Accordingly, the observed turnover across the study area was mediated by species that share similar suites of traits and evolutionary history. Towards richer and acidic soils, exclusion of weaker competitors was an important filter at local scales. In summary, assessing multiple biodiversity facets and broad scale environmental gradients is key to understand the relative importance of multi-scale processes driving the community assembly of European grasslands.
 :::
+
+
+*Citation*: Mugnai, M., **Trindade, D.P.F.**, Thierry, M., Kaushik, K., Hrček, J., Götzenberger, L., 2022. Environment and space drive the community assembly of Atlantic European grasslands: Insights from multiple facets. Journal of Biogeography 49, 699–711. https://doi.org/10.1111/jbi.14331

@@ -1,0 +1,22 @@
+---
+title: "Intro do Git and Github"
+subtitle: Diego P.F. Trindade
+date: '2023-04-18'
+image: "featured.png"
+---
+
+::: {style="text-align: left"} 
+
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://diegotrindade.github.io/laelatu-slides/#/title-slide">Slides</a>
+
+</button>
+
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://github.com/diegotrindade/laelatu-slides">GitHub Repo</a>
+
+</button>
+
+:::

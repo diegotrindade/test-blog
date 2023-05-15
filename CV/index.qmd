@@ -1,0 +1,9 @@
+---
+title: Curriculum Vitae
+description: ""
+author: ""
+page-layout: full
+toc: false
+---
+
+## [CV](https://www.etis.ee/CV/Diego%20Pires%20Ferraz%20Trindade/eng)
