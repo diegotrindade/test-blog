@@ -14,9 +14,9 @@ image: "featured.png"
 
 ![Image credit: Alisson Horst](featured.png)
 
-I'm perhaps a bit late to the Quarto party, but, after some delay, I decided overcoming my laziness and start to migrate my old blogdown/hugo website to Quarto.
+I'm perhaps a bit late to the Quarto party, but, after some delay, I decided overcoming my laziness and started to migrate my old blogdown/hugo website to Quarto.
 
-I've been using Rmarkdown for sometime and recently started using quarto for academic writing and making presentations. Even though quarto is indeed a powerful tool, for the mentioned purposes, it is not that different from rmarkdown or xaringan (except for the fact that revealjs is just great!). However, since I'm not an avid blog user, updating blogdown was always a pain due to the many Hugo updates and inherited conflicts.
+I've been using Rmarkdown for some time and, recently, started using quarto for academic writing and making presentations. Even though quarto is indeed a powerful tool, for the mentioned purposes, it is not that different from Rmarkdown or Xaringan (except for the fact that revealjs is just great!). However, since I'm not an avid blog user, updating blogdown was always a pain due to the many Hugo updates and inherited conflicts.
 
 After reading some posts about the power of blogging using quarto and how easy and intuitive it was, I decided to give it a try and, indeed, the moving was way easier than expected! I'd say that the most "complicated" part was to get used to the new pandoc args (:::) and learn some html/css tricks (which I'm still changing/learning, mostly from [David Schoch](https://github.com/schochastics/quarto-schochastics), [Sam Csik](https://ucsb-meds.github.io/customizing-quarto-websites/#/title-slide) and [Kazuharu Yanagimoto](https://kazuyanagimoto.com/about/).
 
@@ -28,13 +28,12 @@ Here are some posts that helped me a ton during the first steps:
 
 [Creating a blog with Quarto in 10 steps](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/)
 
-Since I had already a website deployed on Netlify, which was linked to a GitHub repository, I just had to change the GitHub repository on Netlify webpage and follow this tutorial:
+Since I had already a website deployed on Netlify, which was linked to a GitHub repository, I just changed the linked GitHub repository on Netlify webpage and followed this tutorial:
 
-[https://quarto.org/docs/publishing/netlify.html](https://quarto.org/docs/publishing/netlify.html)
+<https://quarto.org/docs/publishing/netlify.html>
 
 I created the `_publish.yml` using my old Netlify id and url;
 
 Then, I left only `_site` on the "Basic build settings", removing the "Hugo" reference on the "Build command" field;
 
 Further, I created the `netlify.toml` and `package.json` files, and finally both `publish.yml` and Netlify credentials on GitHub (all steps described here are well detailed on the link above). After doing that, I just had to push all changes to GitHub and the website was live!
-
