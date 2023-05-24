@@ -6,6 +6,8 @@ slug: data-visualization-in-ecology
 html:
     fig-width: 8
     fig-height: 8
+    aliases: 
+      - "https://diegopftrindade.netlify.app/posts/dataviz/index.html"
 execute:
   echo: true
   warning: false
