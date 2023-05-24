@@ -7,13 +7,13 @@ html:
     fig-width: 8
     fig-height: 8
     aliases: 
-      - "https://diegopftrindade.netlify.app/posts/dataviz/index.html"
+      - "https://diegopftrindade.netlify.app/post/data-visualization-in-ecology/index.html"
 execute:
   echo: true
   warning: false
   message: false
-tags:
-  - ggplot
+categories:
+  - ggplot2
   - ecology
   - tidyverse
   - data visualization

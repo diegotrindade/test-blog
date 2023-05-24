@@ -2,14 +2,17 @@
 title: "#3 Statistical analysis in ecology with `broom`"
 author: Diego P.F. Trindade
 date: '2020-07-16'
-slug: statistical-analysis-in-ecology
 html:
     fig-width: 8
     fig-height: 8
+    aliases: 
+      - "https://diegopftrindade.netlify.app/post/statistical-analysis-in-ecology/index.html"
 execute:
   echo: true
   warning: false
   message: false
+categories:
+  - tidymodels
 image: "featured.png"
 ---
 

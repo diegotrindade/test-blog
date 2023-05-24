@@ -2,10 +2,13 @@
 title: "#1 Data wrangling in ecology with `tidyverse`"
 author: Diego P.F. Trindade
 date: '2020-07-14'
-slug: data-wrangling-in-ecology
 html:
     fig-width: 8
     fig-height: 8
+    aliases: 
+      - "https://diegopftrindade.netlify.app/post/data-wrangling-in-ecology/index.html"
+categories:
+  - tidyverse
 execute:
   echo: true
   warning: false
