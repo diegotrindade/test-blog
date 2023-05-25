@@ -13,6 +13,9 @@ execute:
   message: false
 categories:
   - tidymodels
+  - broom
+  - purrr
+  - ecology
 image: "featured.png"
 ---
 

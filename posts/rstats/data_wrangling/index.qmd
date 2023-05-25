@@ -9,6 +9,9 @@ html:
       - "https://diegopftrindade.netlify.app/post/data-wrangling-in-ecology/index.html"
 categories:
   - tidyverse
+  - dplyr
+  - biotime
+  - data cleaning
 execute:
   echo: true
   warning: false
