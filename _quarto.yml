@@ -6,7 +6,7 @@ execute:
   
 website:
   title: "Diego P.F. Trindade"
-  google-analytics: G-FKVH9B22EW
+  google-analytics: "G-FKVH9B22EW"
   cookie-consent: true
 
   navbar:
