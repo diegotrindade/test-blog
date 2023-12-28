@@ -18,7 +18,7 @@ about:
       href: mailto:dpftrindade@gmail.com
 ---
 
-I've just passed my PhD viva at [University of Tartu](https://ut.ee/en), [Macroecology workgroup](https://macroecology.ut.ee/en/). <br> My research focus on understanding how global change drivers (e.g. climate and land-use change) affect the way ecological communities are assembled across space and over time.
+Researcher at [University of Tartu](https://ut.ee/en), [Macroecology workgroup](https://macroecology.ut.ee/en/). <br> My research focus on understanding how global change drivers (e.g. climate and land-use change) affect the way ecological communities are assembled across space and over time.
 
 ::: {style="text-align: center"}
 [Read More →](../about)
