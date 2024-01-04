@@ -12,7 +12,7 @@ execute:
   echo: true
   warning: false
   message: false
-categories:
+tags:
   - ggplot2
   - ecology
   - tidyverse
