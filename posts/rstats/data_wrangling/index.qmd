@@ -7,6 +7,11 @@ html:
     fig-height: 8
     aliases: 
       - "https://diegopftrindade.netlify.app/post/data-wrangling-in-ecology/index.html"
+tags:
+  - tidyverse
+  - dplyr
+  - biotime
+  - data cleaning
 categories:
   - tidyverse
   - dplyr

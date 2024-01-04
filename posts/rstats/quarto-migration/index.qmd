@@ -5,6 +5,10 @@ date: '2023-05-15'
 html:
     fig-width: 8
     fig-height: 8
+tags:
+  - blogdown
+  - quarto
+  - netlify
 categories:
   - blogdown
   - quarto

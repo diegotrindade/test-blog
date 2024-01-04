@@ -16,6 +16,11 @@ categories:
   - broom
   - purrr
   - ecology
+tags:
+  - tidymodels
+  - broom
+  - purrr
+  - ecology
 image: "featured.png"
 ---
 

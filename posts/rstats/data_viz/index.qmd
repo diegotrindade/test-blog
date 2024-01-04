@@ -17,6 +17,11 @@ tags:
   - ecology
   - tidyverse
   - data visualization
+categories:
+  - ggplot2
+  - ecology
+  - tidyverse
+  - data visualization
 image:
   "featured.png"
 ---
