@@ -6,3 +6,9 @@ package = "@quarto/netlify-plugin-quarto"
   to = "/posts/rstats/data_wrangling/"
   status = 301
   force = true
+  
+[[redirects]]
+  from = "/post/data-visualization-in-ecology/"
+  to = "/posts/rstats/data_viz/"
+  status = 301
+  force = true
