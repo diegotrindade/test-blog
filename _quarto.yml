@@ -28,13 +28,12 @@ website:
         
       
 page-footer:
-    left: "© 2022 Diego Trindade"
+    left: "© 2024 Diego Trindade"
     center: "powered by [quarto](https://quarto.org)"
     
 format:
   html:
     theme: 
-    - dark
     - darkly
       
     css: custom.css

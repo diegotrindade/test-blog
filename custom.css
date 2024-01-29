@@ -1,4 +1,5 @@
 /* css styles */
+
 div.sourceCode{
   background-color: black;
 }
@@ -75,4 +76,12 @@ h2 {
 h3 {
   font-size: 1.5em;
   color: #fca649;
+  font-family: 'Nova Square';
+}
+
+
+.listing-title{
+  color: #fca649;
+  text-decoration: underline;
+  font-weight: 700;
 }

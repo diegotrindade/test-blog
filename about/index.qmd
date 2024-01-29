@@ -4,7 +4,7 @@ page-layout: full
 css: index.css
 listing:
   - id: publications	
-    max-description-length: 800
+    max-description-length: 500
     contents: ../publications/published-papers/**/index.qmd
     sort: "date desc"
     type: default
@@ -24,13 +24,11 @@ title-block-banner: false
 ::: {style="text-align: center"}
 ## Education
 
+PhD in Botany and Mycology \| University of Tartu - Estonia
 
-PhD in Botany and Mycology \| University of Tartu - Estonia \| 2017 - 2023
+MSc in Plant Ecology \| Universidade Federal de Pernambuco - Brazil
 
-MSc in Plant Ecology \| Universidade Federal de Pernambuco - Brazil \|  2015 - 2017
-
-BSc in Biological Sciences \| Universidade Estadual do Sudoeste da Bahia - Brazil \| 2010 - 2014
-
+BSc in Biological Sciences \| Universidade Estadual do Sudoeste da Bahia - Brazil
 :::
 
 ::: {style="text-align: center"}
