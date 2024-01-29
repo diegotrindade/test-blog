@@ -73,10 +73,10 @@ h2 {
   color: #51AA75;
 }
 
-h3 {
-  font-size: 1.5em;
-  color: #fca649;
-  font-family: 'Nova Square';
+.no-anchor.listing-title a {
+    color: #fca649; 
+    font-size: .95em;
+    font-family: 'Nova Square';
 }
 
 
@@ -84,4 +84,14 @@ h3 {
   color: #fca649;
   text-decoration: underline;
   font-weight: 700;
+}
+
+h3 code {
+  /* Your desired styles */
+  color: #800080 !important;
+}
+
+.listing-description a code {
+  /* Your desired styles */
+  color: #800080 !important;
 }
