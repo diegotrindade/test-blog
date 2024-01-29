@@ -12,15 +12,16 @@ execute:
   message: false
 image: "featured.jpg"
 ---
-
+::: {style="text-align: left"}
 <button type="button" class="btn btn-outline-success">
 
 <a href="https://link.springer.com/article/10.1007/s10531-023-02771-z">PAPER</a>
 
 </button>
+:::
 
-Abstract
-
+::: column-body-outset
 Species richness is the most commonly used metric to quantify biodiversity. However, examining dark diversity, the group of absent species which can potentially inhabit a site, can provide additional insights about how communities are assembled. In this study we aimed to understand how human impacts and environment affect the observed diversity, dark diversity, completeness (how large is the observed diversity compared to dark diversity) and species pool size (observed and dark diversity together) of vascular plants (i.e., trees, shrubs, herbs and lianas) in Caatinga. Along 144 0.4 ha plots for trees and 0.04 ha plots for shrubs, herbs, and lianas, we recorded 2148 stems from 232 native species. We show that larger, well-connected and wetter fragments present either more observed diversity or larger species pools of vascular plants, indicating that these fragments may act as biodiversity reservoirs in Caatinga. However, these drivers are usually plant life-form dependent, with some variables such as chronic anthropogenic disturbance, habitat amount, soil and temperature also playing secondary roles on observed and dark diversity of different life-forms. Overall, by including dark diversity in the analyses we were able to identify additional effects of human impacts and environment on vegetation change, which would not be possible to be captured by using species richness only. Finally, our results highlight the complexity of human-modified landscapes in dry forests and stress the importance of considering the whole species pool of plants and different growth life-forms when assessing the effects of disturbance and environment on Caatinga vegetation.
+:::
 
-Citation: Gonçalves-Araújo, M.D.O, Carvalho, C.E., Pequeno, P.A.C.L., Trindade, D.P.F., Hughes, F., Araújo, F.S., Pärtel, M. & Sfair., J.C. Observed and dark diversity of plants’ life-forms are driven by climate and human impacts in a tropical dry forest. Biodivers Conserv (2024). https://doi.org/10.1007/s10531-023-02771-z
+*Citation*: Gonçalves-Araújo, M.D.O, Carvalho, C.E., Pequeno, P.A.C.L., **Trindade, D.P.F.**, Hughes, F., Araújo, F.S., Pärtel, M. & Sfair., J.C. Observed and dark diversity of plants' life-forms are driven by climate and human impacts in a tropical dry forest. Biodivers Conserv (2024). https://doi.org/10.1007/s10531-023-02771-z
