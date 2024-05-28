@@ -1,0 +1,28 @@
+---
+title: "A roadmap to carefully select methods for dark-diversity studies"
+subtitle: Bruno Paganeli, Junichi Fujinuma, Diego P.F. Trindade, Carlos P. Carmona & Meelis Pärtel.
+date: '2024-05-15'
+slug: roadmap-jvs
+html:
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: true
+  warning: false
+  message: false
+image: roadmap.jpg
+---
+
+::: {style="text-align: left"}
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://onlinelibrary.wiley.com/doi/10.1111/jvs.13264">PAPER</a>
+
+</button>
+:::
+
+::: column-body-outset
+Dark diversity includes ecologically suitable species currently absent in a site, albeit theoretically able to arrive from the surrounding region. Various methods can estimate the likelihood that an absent species is in the dark diversity of a site. Recent developments in estimation of dark diversity have advanced the field, yet uncertainty on method selection might lead to confusion and misleading results. Here, we provide methodological guidance by reanalyzing a data set used in a recently published dark-diversity study (Hostens et al. 2023; Journal of Vegetation Science 34: e13212). Using various approaches to estimate dark diversity, we discuss why their estimations differ, and examine which methods are more appropriate than others for the particular data set. In this study, the hypergeometric method based on species co-occurrences outperformed the other considered methods (species distribution modelling, Beals index). Further, we show how estimations of dark diversity can be combined with a Bayesian framework to examine which characteristics of sites and species are related to their tendency to have higher dark-diversity size (sites) than expected or to be more frequently in dark diversity (species). This paper hopefully enhances confidence in dark-diversity methods, allowing progress in both ecological theory and biodiversity conservation.
+:::
+
+*Citation*: Paganeli, B., Fujinuma, J., **Trindade,D.P.F.**, Carmona, C.P. & Pärtel, M. (2024) A roadmap tocarefully select methods for dark-diversity studies. Journal ofVegetation Science, 35, e13264.
