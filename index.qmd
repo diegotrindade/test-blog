@@ -18,7 +18,7 @@ about:
       href: mailto:dpftrindade@gmail.com
 ---
 
-Researcher at [University of Tartu](https://ut.ee/en) - [Macroecology workgroup](https://macroecology.ut.ee/en/). <br> My research focuses on understanding how global change drivers (e.g. climate and land-use change) affect the way ecological communities are assembled across space and time.
+Visiting post-doc at the CIDE-CSIC in [Francesco de Bello’s lab](https://functionaldiversitylab.com); Researcher at the University of Tartu - [Macroecology workgroup](https://macroecology.ut.ee/en/). <br> My research focuses on understanding how global change drivers (e.g. climate and land-use change) affect the way ecological communities are assembled across space and time.
 
 ::: {style="text-align: center"}
 [Read More →](../about)
