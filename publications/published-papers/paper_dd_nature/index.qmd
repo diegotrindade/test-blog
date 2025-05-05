@@ -1,0 +1,28 @@
+---
+title: "Global impoverishment of natural vegetation revealed by dark diversity"
+subtitle: Pärtel, M., Tamme, R., Carmona, C.P. (...) Trindade, DPF., (...) Zobel, M.
+date: '2025-04-02'
+slug: dd-nat
+html:
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: true
+  warning: false
+  message: false
+image: "featured.pdf"
+---
+
+::: {style="text-align: left"}
+<button type="button" class="btn btn-outline-success">
+
+<a href="https://www.nature.com/articles/s41586-025-08814-5">PAPER</a>
+
+</button>
+:::
+
+::: column-body-outset
+Anthropogenic biodiversity decline threatens the functioning of ecosystems and the many benefits they provide to humanity^[1](https://www.nature.com/articles/s41586-025-08814-5#ref-CR1 "Ceballos, G. et al. Accelerated modern human-induced species losses: entering the sixth mass extinction. Sci. Adv. 1, e1400253 (2015).")^. As well as causing species losses in directly affected locations, human influence might also reduce biodiversity in relatively unmodified vegetation if far-reaching anthropogenic effects trigger local extinctions and hinder recolonization. Here we show that local plant diversity is globally negatively related to the level of anthropogenic activity in the surrounding region. Impoverishment of natural vegetation was evident only when we considered community completeness: the proportion of all suitable species in the region that are present at a site. To estimate community completeness, we compared the number of recorded species with the dark diversity—ecologically suitable species that are absent from a site but present in the surrounding region^[2](https://www.nature.com/articles/s41586-025-08814-5#ref-CR2 "Pärtel, M., Szava-Kovats, R. & Zobel, M. Dark diversity: shedding light on absent species. Trends Ecol. Evol. 26, 124–128 (2011).")^. In the sampled regions with a minimal human footprint index, an average of 35% of suitable plant species were present locally, compared with less than 20% in highly affected regions. Besides having the potential to uncover overlooked threats to biodiversity, dark diversity also provides guidance for nature conservation. Species in the dark diversity remain regionally present, and their local populations might be restored through measures that improve connectivity between natural vegetation fragments and reduce threats to population persistence.
+:::
+
+*Citation*: Pärtel, M., Tamme, R., Carmona, C.P. *et al.* Global impoverishment of natural vegetation revealed by dark diversity. *Nature* (2025). https://doi.org/10.1038/s41586-025-08814-5
