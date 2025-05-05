@@ -10,7 +10,7 @@ execute:
   echo: true
   warning: false
   message: false
-image: "featured.pdf"
+image: "featured.jpg"
 ---
 
 ::: {style="text-align: left"}
