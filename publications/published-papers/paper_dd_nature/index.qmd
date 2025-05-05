@@ -1,6 +1,6 @@
 ---
 title: "Global impoverishment of natural vegetation revealed by dark diversity"
-subtitle: Pärtel, M., Tamme, R., Carmona, C.P. (...) Trindade, DPF., (...) Zobel, M.
+subtitle: Meelis Pärtel, Riin Tamme, Carlos P. Carmona, (...) Diego P.F. Trindade, (...) Martin Zobel.
 date: '2025-04-02'
 slug: dd-nat
 html:
